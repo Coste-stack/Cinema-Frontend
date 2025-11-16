@@ -1,0 +1,35 @@
+<div class="movie-list">
+  <h2>Movies</h2>
+
+  @if (loading()) {
+    <p>Loading movies...</p>
+  }
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  @if (!loading() && movieList().length > 0) {
+    <div class="movies-container">
+      @for (movie of movieList(); track movie.id) {
+        <div class="movie-card">
+          <div class="movie-top">
+            <h3>{{ movie.title }}</h3>
+            <p class="description">{{ movie.description }}</p>
+          </div>
+          <div class="movie-bottom">
+            <div class="details">
+              <span class="duration">{{ movie.duration }} min</span>
+              <span class="rating">{{ movie.rating }}</span>
+            </div>
+            <div class="genres">
+              @for (genre of movie.genres; track genre.id) {
+                <span class="genre-item">{{ genre.name }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
