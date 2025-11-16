@@ -1,0 +1,17 @@
+header {
+  padding: 1rem 3rem;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > span {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--gray-700);
+      }
+    }
+  }
+}

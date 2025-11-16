@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../models/movie.model';
 
