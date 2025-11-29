@@ -2,31 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie.model';
+import { PopularMovieResponse } from '../models/popular-movie-response.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5173/Movie';
+  private baseUrl = 'http://localhost:8080/';
+  private movieApiUrl = this.baseUrl + 'Movie';
+  private statisticsApiUrl = this.baseUrl + 'Statistics';
 
   getAll(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.apiUrl);
+    return this.http.get<Movie[]>(this.movieApiUrl);
   }
 
   getById(id: number): Observable<Movie> {
-    return this.http.get<Movie>(`${this.apiUrl}/${id}`);
+    return this.http.get<Movie>(`${this.movieApiUrl}/${id}`);
   }
 
-  create(movie: Partial<Movie>): Observable<Movie> {
-    return this.http.post<Movie>(this.apiUrl, movie);
+  getPopular(top?: string): Observable<PopularMovieResponse[]> {
+    return this.http.get<PopularMovieResponse[]>(this.statisticsApiUrl + '/popular-movies' + (top ? `?top=${top}` : ''));
   }
 
-  update(id: number, movie: Partial<Movie>): Observable<Movie> {
-    return this.http.put<Movie>(`${this.apiUrl}/${id}`, movie);
-  }
-
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  getLatest(days?: string): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.statisticsApiUrl + '/latest-movies' + (days ? `?days=${days}` : ''));
   }
 }

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { MovieList } from './components/movie-list/movie-list';
+import { MainPage } from './components/main-page/main-page';
 
 export const routes: Routes = [
-  { path: '', component: MovieList },
-  { path: 'repertuar', component: MovieList },
+  { path: '', component: MainPage },
+  { path: 'repertuar', component: MainPage },
 ];
