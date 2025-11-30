@@ -9,7 +9,7 @@ import { PopularMovieResponse } from '../models/popular-movie-response.model';
 })
 export class MovieService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = 'https://localhost:8080/';
   private movieApiUrl = this.baseUrl + 'Movie';
   private statisticsApiUrl = this.baseUrl + 'Statistics';
 

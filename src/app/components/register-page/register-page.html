@@ -1,0 +1,18 @@
+@if (loading()) {
+  <p>Logging in...</p>
+}
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="userForm" (ngSubmit)="submit()" class="form">
+
+  <label for="email">Email</label>
+  <input class="form-control" id="email" formControlName="email" placeholder="Email" />
+
+  <label for="password">Password</label>
+  <input class="form-control" id="password" formControlName="password" placeholder="Password" />
+
+  <button class="form-submit-btn" type="submit">Submit</button>
+</form>
