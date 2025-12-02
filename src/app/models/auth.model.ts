@@ -1,14 +1,19 @@
-export interface LoginRequestDTO {
+export interface LoginRequest {
   email: string;
   password: string;
 }
 
-export interface RegisterRequestDTO {
+export interface RegisterRequest {
   email: string;
   password: string;
 }
 
-export interface LoginResponseDTO {
+export interface AuthResponse {
+  token: Token;
+  refreshToken: Token;
+}
+
+export interface Token {
   token: string;
   expiresAt: string;
 }

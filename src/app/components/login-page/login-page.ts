@@ -37,10 +37,9 @@ export class LoginPage {
           console.log('Login success:', response);
           this.loading.set(false);
 
-          const token = response.token;
-          const expires = new Date(response.expiresAt);
-          console.log('Token:', token);
-          console.log('Expires at:', expires);
+          const token = response.token.token;
+          const expires = new Date(response.token.expiresAt);
+          console.log('Token expires at:', expires);
         },
         error: (err) => {
           console.error('Error logging in:', err);
