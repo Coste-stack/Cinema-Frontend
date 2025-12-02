@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Movie } from '../../models/movie.model';
 
 @Component({
-  selector: 'app-movie-list',
+  selector: 'app-movie-showcase-list',
   imports: [],
-  templateUrl: './movie-list.html',
-  styleUrl: './movie-list.scss',
+  templateUrl: './movie-showcase-list.html',
+  styleUrl: './movie-showcase-list.scss',
 })
-export class MovieList {
+export class MovieShowcaseList {
   @Input() movieList: Movie[] = [];
   @Input() loading: boolean = true;
   @Input() error: string | null = null;

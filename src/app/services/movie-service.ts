@@ -14,7 +14,7 @@ export class MovieService {
   private statisticsApiUrl = this.baseUrl + 'Statistics';
 
   getAll(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.movieApiUrl);
+    return this.http.get<Movie[]>(`${this.movieApiUrl}/screenings`);
   }
 
   getById(id: number): Observable<Movie> {

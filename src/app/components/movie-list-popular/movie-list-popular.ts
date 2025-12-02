@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../models/movie.model';
-import { MovieList } from '../movie-list/movie-list';
+import { MovieShowcaseList } from '../movie-showcase-list/movie-showcase-list';
 
 @Component({
   selector: 'app-movie-list-popular',
-  imports: [MovieList],
+  imports: [MovieShowcaseList],
   templateUrl: './movie-list-popular.html',
   styleUrl: './movie-list-popular.scss',
 })
