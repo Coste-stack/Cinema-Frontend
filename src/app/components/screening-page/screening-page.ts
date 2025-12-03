@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit, computed } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ScreeningService } from '../../services/screening-service';
 import { Screening, SelectedSeat } from '../../models/screening.model';
 import { ScreeningMapDisplay } from '../screening-map-display/screening-map-display';
@@ -13,6 +13,7 @@ import { ScreeningMapDisplay } from '../screening-map-display/screening-map-disp
 })
 export class ScreeningPage implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private screeningService = inject(ScreeningService);
   screening = signal<Screening | null>(null);
   selectedSeats = signal<SelectedSeat[]>([]);
@@ -71,6 +72,20 @@ export class ScreeningPage implements OnInit {
 
   isSeatSelected(seatId: number): boolean {
     return this.selectedSeats().some(s => s.id === seatId);
+  }
+
+  confirmSeats(): void {
+    if (this.selectedSeats().length === 0) {
+      return;
+    }
+
+    // Navigate to booking page with selected seats
+    this.router.navigate(['/rezerwacja'], {
+      state: {
+        selectedSeats: this.selectedSeats(),
+        screeningId: this.id
+      }
+    });
   }
 
   private loadSeatMap(): void {
