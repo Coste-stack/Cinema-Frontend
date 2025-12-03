@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="seat"
+  [class.selected]="selected"
+  [class.unavailable]="!seat.isAvailable"
+  [attr.aria-pressed]="selected"
+  [attr.aria-label]="'Seat ' + seat.number + ' in row ' + rowLabel + (selected ? ' selected' : '') + (!seat.isAvailable ? ' unavailable' : '')"
+  [disabled]="!seat.isAvailable"
+  (click)="onClick()"
+  (keydown)="onKeyDown($event)">
+  {{ seat.number }}
+</button>

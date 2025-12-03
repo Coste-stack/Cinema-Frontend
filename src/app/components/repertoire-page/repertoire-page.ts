@@ -94,7 +94,8 @@ export class RepertoirePage {
     this.movieService.getAll(true)
       .subscribe({
         next: (movies) => {
-          console.log('Observable emitted the next value: ' + JSON.stringify(movies));
+          console.log('Successfully received movies');
+          //console.log('Observable emitted the next value: ' + JSON.stringify(movies));
           const filteredMovies = this.formatMovieDates(movies);
           this.movieList.set(filteredMovies);
           this.loading.set(false);

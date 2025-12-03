@@ -1,0 +1,48 @@
+<div id="screening-container">
+  @if (loading) {
+    <p class="loading">Loading seat map...</p>
+  }
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (!loading && screening !== null) {
+  <div id="seat-map-container">
+    <h2>Wybierz miejsca</h2>
+    @for (row of screening.seatMap; track $index) {
+      <div class="row">
+        <div class="row-label">
+          {{ row.row }}
+        </div>
+        <div class="seats">
+          @for (seat of row.seats; track seat.id) {
+            <app-seat
+              [seat]="seat"
+              [selected]="isSeatSelected(seat.id)"
+              [rowLabel]="row.row"
+              (toggle)="onSeatToggle($event)">
+            </app-seat>
+          }
+        </div>
+      </div>
+    }
+    <div class="legend-container">
+      <span class="legend-item" id="legend-available">
+        <span class="legend-color"></span>
+        <p class="legend-label">Miejsca dostępne</p>
+      </span>
+      <span class="legend-item" id="legend-selected">
+        <span class="legend-color"></span>
+        <p class="legend-label">Wybrane miejsca</p>
+      </span>
+      <span class="legend-item" id="legend-unavailable">
+        <span class="legend-color"></span>
+        <p class="legend-label">Miejsca niedostępne</p>
+      </span>
+    </div>
+  </div>
+  }
+</div>
+
+<ng-content></ng-content>

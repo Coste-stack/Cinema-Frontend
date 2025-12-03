@@ -7,20 +7,19 @@ export interface Movie {
   genres: Genre[];
   rating?: MovieRating;
   releaseDate?: string;
-  screenings?: Screening[];
+  screenings?: ScreeningMovie[];
+}
+
+export interface ScreeningMovie {
+  id: number;
+  movieId: number;
+  startTime: string;
+  endTime: string;
 }
 
 export interface Genre {
   id: number;
   name: string;
-}
-
-export interface Screening {
-  id: number;
-  movieId: number;
-  startTime: string;
-  endTime: string;
-  theaterId: number;
 }
 
 export enum MovieRating {
