@@ -13,8 +13,9 @@ export class MovieService {
   private movieApiUrl = this.baseUrl + 'Movie';
   private statisticsApiUrl = this.baseUrl + 'Statistics';
 
-  getAll(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.movieApiUrl}/screenings`);
+  getAll(full?: Boolean): Observable<Movie[]> {
+    const effectiveFull = full ?? false;
+    return this.http.get<Movie[]>(`${this.movieApiUrl}?full=${effectiveFull}`);
   }
 
   getById(id: number): Observable<Movie> {
@@ -22,10 +23,12 @@ export class MovieService {
   }
 
   getPopular(top?: string): Observable<PopularMovieResponse[]> {
-    return this.http.get<PopularMovieResponse[]>(this.statisticsApiUrl + '/popular-movies' + (top ? `?top=${top}` : ''));
+    const url = `${this.statisticsApiUrl}/popular-movies${top ? `?top=${top}` : ''}`;
+    return this.http.get<PopularMovieResponse[]>(url);
   }
 
   getLatest(days?: string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.statisticsApiUrl + '/latest-movies' + (days ? `?days=${days}` : ''));
+    const url = `${this.statisticsApiUrl}/latest-movies${days ? `?days=${days}` : ''}`;
+    return this.http.get<Movie[]>(url);
   }
 }

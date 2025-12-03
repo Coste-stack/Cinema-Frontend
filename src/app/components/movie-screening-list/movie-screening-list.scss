@@ -52,7 +52,7 @@
   font-size: 0.9rem;
 }
 
-.screening-card {
+.screening-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -63,9 +63,11 @@
 
 .screening-item {
   background: var(--gray-400);
-  padding: 0.25rem 0.5rem;
+  height: fit-content;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .error {

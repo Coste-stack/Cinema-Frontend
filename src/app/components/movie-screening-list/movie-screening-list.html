@@ -25,15 +25,15 @@
                 <span class="rating">{{ movie.rating }}</span>
               </div>
               <div class="genres">
-                @for (genre of movie.genres; track genre.id) {
-                  <span class="genre-item">{{ genre.name }}</span>
+                @for (genre of movie.genres; track $index) {
+                  <span class="genre-item">{{ genre }}</span>
                 }
               </div>
             </div>
           </div>
 
-          <div class="screening-card">
-            @for (screening of movie.screenings; track screening.id) {
+          <div class="screening-container">
+            @for (screening of movie.screenings; track $index) {
               <span class="screening-item">{{ screening.startTime }}</span>
             }
           </div>

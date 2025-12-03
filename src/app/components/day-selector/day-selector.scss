@@ -1,12 +1,10 @@
 :host {
   display: block;
-  width: 50vw;
-  box-sizing: border-box;
 }
 
 .day-selector {
   display: flex;
-  margin: 1rem 0;
+  margin: 0.5rem 0 0;
   flex-wrap: nowrap;
   width: 100%;
   border: 1px solid #b8b8b8;
@@ -20,14 +18,11 @@
 .day-button {
   flex: 1 1 0;
   padding: 0.5rem 1rem;
-  margin: 0;
   background: transparent;
   color: var(--gray-700);
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+  transition: color 0.25s ease, transform 0.15s ease;
   font-size: 0.9rem;
-  border: none;
-  border-radius: 0;
   text-align: center;
   position: relative;
   z-index: 2;
@@ -44,13 +39,11 @@
     color: #fff;
   }
 
-  /* Separators between buttons when not active */
   & + .day-button {
     box-shadow: inset 1px 0 0 #e6e6e6;
   }
 }
 
-/* Animated moving background indicator */
 .indicator {
   position: absolute;
   top: 0;
@@ -58,7 +51,7 @@
   height: 100%;
   width: 0;
   background: #007bff;
-  transition: left 250ms cubic-bezier(.2,.9,.2,1), width 220ms cubic-bezier(.2,.9,.2,1);
+  transition: left 220ms cubic-bezier(.2,.9,.2,1), width 220ms cubic-bezier(.2,.9,.2,1);
   transform: none;
   z-index: 1;
   pointer-events: none;

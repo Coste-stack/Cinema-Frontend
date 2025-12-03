@@ -1,0 +1,12 @@
+<div class="day-selector">
+  @for (day of days; track day.value) {
+    <button
+      type="button"
+      class="day-button"
+      [class.active]="selected === day.value"
+      (click)="onSelect(day.value)">
+      {{ day.label }}
+    </button>
+  }
+  <div class="indicator" aria-hidden="true"></div>
+</div>
