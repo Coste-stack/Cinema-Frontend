@@ -61,13 +61,30 @@
   overflow-x: auto;
 }
 
-.screening-item {
-  background: var(--gray-400);
+button.screening-item {
+  background-color: hsl(211, 100%, 50%);
+  color: hsl(0, 0%, 100%);
   height: fit-content;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   font-size: 0.9rem;
   font-weight: 600;
+  cursor: pointer;
+
+  transform: translateY (0);
+  will-change: transform;
+  transition: transform 250ms cubic-bezier(.2,.9,.2,1), background-color 180ms ease;
+
+  &:hover {
+    background-color: hsl(211, 100%, 60%);
+    transform: translateY(2px);
+  }
+
+  &:focus {
+    outline: 2px solid rgba(0,123,255,0.12);
+    outline-offset: 2px;
+    transform: translateY(2px);
+  }
 }
 
 .error {

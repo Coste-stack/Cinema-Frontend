@@ -33,8 +33,12 @@
           </div>
 
           <div class="screening-container">
-            @for (screening of movie.screenings; track $index) {
-              <span class="screening-item">{{ screening.startTime }}</span>
+            @for (screening of movie.screenings; track screening.id) {
+              <button
+                class="screening-item"
+                [routerLink]="['/repertuar', screening.id]">
+                  {{ screening.startTime }}
+              </button>
             }
           </div>
         </div>

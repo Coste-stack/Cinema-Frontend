@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Movie } from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-screening-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './movie-screening-list.html',
   styleUrl: './movie-screening-list.scss',
 })
