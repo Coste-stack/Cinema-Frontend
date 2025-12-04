@@ -21,8 +21,14 @@
                   }
                 </select>
               </div>
+              <div class="ticket-price">
+                <span> {{ getPrice(seat.id) }}zł </span>
+              </div>
             </li>
           }
+          <li class="total-price-info">
+            <span> Total price: {{ getTotalPrice() }}zł</span>
+          </li>
         </ul>
       </div>
 

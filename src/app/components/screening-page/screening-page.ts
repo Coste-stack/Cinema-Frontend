@@ -12,9 +12,10 @@ import { ScreeningMapDisplay } from '../screening-map-display/screening-map-disp
   styleUrl: './screening-page.scss',
 })
 export class ScreeningPage implements OnInit {
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private screeningService = inject(ScreeningService);
+
   screening = signal<Screening | null>(null);
   selectedSeats = signal<SelectedSeat[]>([]);
   selectedSeatIds = computed(() => this.selectedSeats().map(s => s.id));
