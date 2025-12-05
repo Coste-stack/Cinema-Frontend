@@ -14,6 +14,7 @@ export class BookingPage extends BaseBooking implements OnInit {
   private bookingService = inject(BookingService);
 
   bookingRequest: BookingRequest | null = null;
+  bookingId: number | null = null;
 
   ngOnInit(): void {
     const navigation = this.router.currentNavigation();
@@ -36,6 +37,7 @@ export class BookingPage extends BaseBooking implements OnInit {
 
   confirmBooking(): void {
     console.log('Booking request:', this.screeningId);
+    this.initiateBooking();
   }
 
   reverseBooking(): void {
@@ -52,6 +54,30 @@ export class BookingPage extends BaseBooking implements OnInit {
       console.error('Cannot navigate back: screeningId is null');
       this.router.navigate(['/repertuar']);
     }
+  }
+
+  private initiateBooking(): void {
+    this.loading.set(true);
+    this.error.set(null);
+
+    if (this.bookingRequest === null) {
+      console.error('Cannot initiate booking: ', 'Booking request is null')
+      return;
+    }
+
+    this.bookingService.initiateBooking(this.bookingRequest)
+      .subscribe({
+        next: (response) => {
+          console.log('Successfully received initiate booking response:', response);
+          this.bookingId = response;
+          this.loading.set(false);
+        },
+        error: (err) => {
+          this.error.set('Failed to initiate booking');
+          this.loading.set(false);
+          console.error('Error loading initiate booking:', err);
+        }
+      });
   }
 
 }

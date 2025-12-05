@@ -38,7 +38,7 @@ export interface TicketPriceResponse {
 
 export interface BookingRequest {
   screeningId: number;
-  tickets: TicketPriceRequest[];
+  tickets: TicketRequest[];
   email?: string;
 }
 
