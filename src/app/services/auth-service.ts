@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginRequest, RegisterRequest, AuthResponse, Token } from '../models/auth.model';
+import { TokenService } from './token-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private tokenService = inject(TokenService);
   private http = inject(HttpClient);
   private baseUrl = 'https://localhost:8080/';
   private authApiUrl = this.baseUrl + 'Auth';
@@ -21,5 +23,14 @@ export class AuthService {
 
   refreshToken(refreshToken: Token): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.authApiUrl}/refresh-token`, refreshToken);
+  }
+
+  setLocalToken(token: string, expiresAt: Date): void {
+    const tokenObj: Token = {
+      token: token,
+      expiresAt: expiresAt.toISOString(),
+    };
+
+    this.tokenService.setAuthToken(tokenObj);
   }
 }

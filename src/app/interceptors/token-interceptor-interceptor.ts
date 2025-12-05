@@ -15,9 +15,6 @@ export const tokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenObj = tokenService.getAuthToken();
   const token = tokenObj?.token;
 
-  console.log('Interceptor - Token exists:', !!token);
-  console.log('Interceptor - Request URL:', req.url);
-
   const authReq = token
     ? req.clone({
         setHeaders:{
@@ -25,8 +22,6 @@ export const tokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
         }
       })
     : req;
-
-  console.log('Interceptor - Authorization header:', authReq.headers.get('Authorization'));
 
   return next(authReq).pipe(
     catchError((err) => {

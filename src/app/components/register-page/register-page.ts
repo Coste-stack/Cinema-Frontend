@@ -40,6 +40,9 @@ export class RegisterPage {
           const token = response.token.token;
           const expires = new Date(response.token.expiresAt);
           console.log('Token expires at:', expires);
+
+          // Update token in service
+          this.authService.setLocalToken(token, expires);
         },
         error: (err) => {
           console.error('Error registering:', err);
