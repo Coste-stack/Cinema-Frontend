@@ -4,6 +4,7 @@ import { LoginPage } from './components/login-page/login-page';
 import { RegisterPage } from './components/register-page/register-page';
 import { RepertoirePage } from './components/repertoire-page/repertoire-page';
 import { ScreeningPage } from './components/screening-page/screening-page';
+import { TicketPage } from './components/ticket-page/ticket-page';
 import { BookingPage } from './components/booking-page/booking-page';
 
 export const routes: Routes = [
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterPage },
   { path: 'repertuar', component: RepertoirePage },
   { path: 'repertuar/:id', component: ScreeningPage },
-  { path: 'rezerwacja', component: BookingPage }
+  { path: 'rezerwacja/bilety', component: TicketPage },
+  { path: 'rezerwacja/zamowienie', component: BookingPage }
 ];

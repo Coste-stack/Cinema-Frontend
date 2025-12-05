@@ -1,5 +1,5 @@
 <div class="booking-container">
-  <h1>Zatwierdz zamowienie</h1>
+  <h1>Wybierz bilety</h1>
 
   @if (selectedSeats().length > 0) {
     <div class="booking-details">
@@ -10,8 +10,15 @@
               <div class="seat-info">
                 <span>Rząd: <strong>{{ seat.row }}</strong> Miejsce: <strong>{{ seat.number }}</strong></span>
               </div>
-              <div class="ticket-type-display">
-                <span>Typ biletu: <strong>{{ getTicketType(seat.id) }}</strong></span>
+              <div class="ticket-type-selector">
+                <label for="ticket-type-{{ seat.id }}">Typ biletu:</label>
+                <select
+                  id="ticket-type-{{ seat.id }}"
+                  (change)="onTicketTypeChange(seat.id, $any($event.target).value)">
+                  @for (type of availableTicketTypes; track type) {
+                    <option [value]="type" [selected]="getTicketType(seat.id) === type">{{ type }}</option>
+                  }
+                </select>
               </div>
               <div class="ticket-price">
                 <span> {{ getPrice(seat.id) }}zł </span>
@@ -25,8 +32,8 @@
       </div>
 
       <div class="booking-actions">
-        <button class="cancel-btn" (click)="reverseBooking()">
-          <p>Wstecz</p>
+        <button class="cancel-btn" (click)="cancelBooking()">
+          <p>Anuluj</p>
         </button>
         <button class="confirm-btn" (click)="confirmBooking()">
           <p>Dalej</p>
@@ -35,8 +42,8 @@
     </div>
   } @else {
     <div class="no-seats">
-      <p>Brak wybranych miejsc</p>
-      <button (click)="reverseBooking()">Wstecz</button>
+      <p>Nie wybrano żadnych miejsc</p>
+      <button (click)="cancelBooking()">Powrót do repertuaru</button>
     </div>
   }
 </div>

@@ -77,11 +77,12 @@ export class ScreeningPage implements OnInit {
 
   confirmSeats(): void {
     if (this.selectedSeats().length === 0) {
+      console.log('No seats present for screening:', this.id);
       return;
     }
 
     // Navigate to booking page with selected seats
-    this.router.navigate(['/rezerwacja'], {
+    this.router.navigate(['/rezerwacja/bilety'], {
       state: {
         selectedSeats: this.selectedSeats(),
         screeningId: this.id
