@@ -2,7 +2,11 @@
   <nav>
     <span routerLink="/">Kino</span>
     <span routerLink="/repertuar">Repertuar</span>
+    @if (!isUser()) {
     <span routerLink="/login">Login</span>
     <span routerLink="/register">Register</span>
+    } @else {
+      <span (click)="onLogout()">Logout</span>
+    }
   </nav>
 </header>
