@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { BookingRequest } from '../../models/ticket.model';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking-service';
 import { BaseBooking } from '../helpers/base-booking';
+import { finalize, Observable, tap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-booking-page',
@@ -37,7 +38,19 @@ export class BookingPage extends BaseBooking implements OnInit {
 
   confirmBooking(): void {
     console.log('Booking request:', this.screeningId);
-    this.initiateBooking();
+    this.initiateBooking().subscribe({
+      next: (bookingId) => {
+        // TODO: add further booking logic - payment
+        this.router.navigate(['/rezerwacja/potwierdzenie'], {
+          state: { bookingId }
+        });
+      },
+      error: (err) => {
+        this.router.navigate(['/rezerwacja/blad'], {
+          state: { error: err.message }
+        });
+      }
+    });
   }
 
   reverseBooking(): void {
@@ -56,17 +69,17 @@ export class BookingPage extends BaseBooking implements OnInit {
     }
   }
 
-  private initiateBooking(): void {
+  private initiateBooking(): Observable<number> {
     this.loading.set(true);
     this.error.set(null);
 
     if (this.bookingRequest === null) {
       console.error('Cannot initiate booking: ', 'Booking request is null')
-      return;
+      return throwError(() => new Error('Booking request is null'));
     }
 
-    this.bookingService.initiateBooking(this.bookingRequest)
-      .subscribe({
+    return this.bookingService.initiateBooking(this.bookingRequest).pipe(
+      tap({
         next: (response) => {
           console.log('Successfully received initiate booking response:', response);
           this.bookingId = response;
@@ -77,7 +90,8 @@ export class BookingPage extends BaseBooking implements OnInit {
           this.loading.set(false);
           console.error('Error loading initiate booking:', err);
         }
-      });
+      }),
+      finalize(() => this.loading.set(false))
+    )
   }
-
 }

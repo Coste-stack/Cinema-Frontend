@@ -1,0 +1,14 @@
+<div class="booking-fail-container">
+  <h1>Wystąpił błąd podczas rezerwacji</h1>
+
+  @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  } @else {
+    <p>Nie udało się zarejestrować rezerwacji. Spróbuj ponownie później.</p>
+  }
+
+  <div class="actions">
+    <button (click)="goBack()">Wróć do wyboru biletów</button>
+    <button (click)="goHome()">Przejdź do repertuaru</button>
+  </div>
+</div>
