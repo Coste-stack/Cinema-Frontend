@@ -33,4 +33,9 @@ export class TokenService {
   public removeRefreshToken(): void {
     sessionStorage.removeItem(this.REFRESH_TOKEN_KEY);
   }
+
+  public isAuthTokenExpired(): boolean {
+    const token = this.getAuthToken();
+    return !token || new Date(token.expiresAt).getTime() <= Date.now();
+  }
 }

@@ -31,6 +31,21 @@
         </ul>
       </div>
 
+      <div class="user-info">
+        <form [formGroup]="userForm" class="contact-form">
+          @if (emailInputEnabled) {
+            <label for="email">Adres e-mail</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+            />
+            <div class="error">{{ userFormError() }}</div>
+          }
+        </form>
+      </div>
+
       <div class="booking-actions">
         <button class="cancel-btn" (click)="cancelBooking()">
           <p>Anuluj</p>

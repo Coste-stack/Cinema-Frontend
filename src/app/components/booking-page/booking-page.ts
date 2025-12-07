@@ -16,6 +16,7 @@ export class BookingPage extends BaseBooking implements OnInit {
 
   bookingRequest: BookingRequest | null = null;
   bookingId: number | null = null;
+  userEmail: string | null = null;
 
   ngOnInit(): void {
     const navigation = this.router.currentNavigation();
@@ -28,6 +29,7 @@ export class BookingPage extends BaseBooking implements OnInit {
     this.bookingRequest = state['bookingRequest'];
     this.selectedSeats.set(state['selectedSeats']);
     this.seatTicketTypes.set(state['seatTicketTypes']);
+    this.userEmail = state['user']?.email ?? null;
 
     if (!this.validateAndSetScreeningId(this.bookingRequest?.screeningId)) {
       return;
