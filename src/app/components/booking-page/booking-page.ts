@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking-service';
 import { BaseBooking } from '../helpers/base-booking';
 import { finalize, Observable, tap, throwError } from 'rxjs';
+import { PayuRequest } from '../../models/payu.model';
 
 @Component({
   selector: 'app-booking-page',
@@ -41,11 +42,29 @@ export class BookingPage extends BaseBooking implements OnInit {
   confirmBooking(): void {
     console.log('Booking request:', this.screeningId);
     this.initiateBooking().subscribe({
-      next: (bookingId) => {
-        // TODO: add further booking logic - payment
-        this.router.navigate(['/rezerwacja/potwierdzenie'], {
-          state: { bookingId }
+      next: () => {
+        this.payBooking();
+      },
+      error: (err) => {
+        this.router.navigate(['/rezerwacja/blad'], {
+          state: { error: err.message }
         });
+      }
+    });
+  }
+
+  payBooking(): void {
+    if (this.bookingId === null) {
+      console.error('Cannot initiate pay booking: ', 'Booking Id is null');
+      return;
+    }
+    const bookingId: number = this.bookingId;
+    const request: PayuRequest = { BookingId: bookingId };
+    console.log('PayU request:', request);
+    this.bookingService.payBooking(request).subscribe({
+      next: (response) => {
+        const url: string = response.redirectUri;
+        window.open(url, '_blank');
       },
       error: (err) => {
         this.router.navigate(['/rezerwacja/blad'], {
@@ -82,9 +101,9 @@ export class BookingPage extends BaseBooking implements OnInit {
 
     return this.bookingService.initiateBooking(this.bookingRequest).pipe(
       tap({
-        next: (response) => {
-          console.log('Successfully received initiate booking response:', response);
-          this.bookingId = response;
+        next: (responseBookingId) => {
+          console.log('Successfully received initiate booking response:', responseBookingId);
+          this.bookingId = responseBookingId;
           this.loading.set(false);
         },
         error: (err) => {
