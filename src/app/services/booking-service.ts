@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BookingRequest } from '../models/ticket.model';
 import { PayuRequest, PayuResponse } from '../models/payu.model';
+import { UserBooking } from '../models/booking.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,10 @@ export class BookingService {
 
   initiateBooking(request: BookingRequest): Observable<number> {
     return this.http.post<number>(`${this.bookingApiUrl}/initiate`, request);
+  }
+
+  getMyBookings(): Observable<UserBooking[]> {
+    return this.http.get<UserBooking[]>(`${this.bookingApiUrl}/my-bookings`);
   }
 
   payBooking(request: PayuRequest): Observable<PayuResponse> {

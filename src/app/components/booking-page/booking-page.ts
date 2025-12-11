@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BookingRequest } from '../../models/ticket.model';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking-service';
