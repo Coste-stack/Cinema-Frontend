@@ -24,7 +24,7 @@
   border-radius: 8px;
   padding: 1rem;
   background: white;
-  flex: 0 0 300px;
+  flex: 0 1 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -62,7 +62,7 @@
 }
 
 button.screening-item {
-  background-color: hsl(211, 100%, 50%);
+  background-color: var(--sage-green);
   color: hsl(0, 0%, 100%);
   height: fit-content;
   padding: 0.5rem 1rem;
@@ -71,17 +71,17 @@ button.screening-item {
   font-weight: 600;
   cursor: pointer;
 
-  transform: translateY (0);
+  transform: translateY(0);
   will-change: transform;
   transition: transform 250ms cubic-bezier(.2,.9,.2,1), background-color 180ms ease;
 
   &:hover {
-    background-color: hsl(211, 100%, 60%);
+    background-color: var(--blushed-brick);
     transform: translateY(2px);
   }
 
   &:focus {
-    outline: 2px solid rgba(0,123,255,0.12);
+    outline: 2px solid var(--blushed-brick);
     outline-offset: 2px;
     transform: translateY(2px);
   }

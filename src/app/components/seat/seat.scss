@@ -1,37 +1,39 @@
 .seat {
-  min-width: 40px;
-  min-height: 40px;
-  padding: 8px;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  width: clamp(2.5rem, 4vw, 3rem);
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
   margin: 2px;
-  border: 1px solid hsl(0, 0%, 60%);
-  background-color: hsl(176, 94%, 28%);
+  border: 1px solid hsl(0, 0%, 70%);
+  background-color: var(--sage-green);
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 14px;
   font-weight: 500;
-  color: white;
+  color: hsl(0, 0%, 100%);
 
   &:hover:not(:disabled) {
-    border-color: hsl(176, 94%, 28%);
-    background-color: hsl(176, 94%, 38%);
+    background-color: var(--blushed-brick);
     transform: scale(1.05);
   }
 
   &.selected {
-    background-color: hsl(165, 95%, 43%);
-    border-color: hsl(165, 95%, 43%);
+    background-color: var(--blushed-brick);
 
     &:hover {
-      background-color: hsl(165, 95%, 53%);
-      border-color: hsl(165, 95%, 53%);
+      background-color: var(--blushed-brick);
     }
   }
 
   &.unavailable,
   &:disabled {
     background-color: hsl(0, 0%, 90%);
+    border-color: hsl(0, 0%, 90%);
     color: hsl(0, 0%, 50%);
-    border-color: #dee2e6;
     cursor: not-allowed;
     opacity: 0.6;
 
