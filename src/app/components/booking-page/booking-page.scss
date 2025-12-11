@@ -45,37 +45,6 @@
             flex: 0 0 auto;
           }
 
-          .ticket-type-selector {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex: 0 0 auto;
-
-            label {
-              font-size: 0.9rem;
-              color: hsl(0, 0%, 40%);
-              white-space: nowrap;
-            }
-
-            select {
-              padding: 0.5rem 0.75rem;
-              border: 1px solid #d1d5db;
-              border-radius: 0.5rem;
-              background: white;
-              font-size: 0.9rem;
-              cursor: pointer;
-
-              &:hover {
-                border-color: hsl(165, 95%, 43%);
-              }
-
-              &:focus {
-                outline: none;
-                border-color: hsl(165, 95%, 43%);
-              }
-            }
-          }
-
           .ticket-price {
             margin-left: auto;
           }
@@ -122,21 +91,21 @@
 
         &.confirm-btn {
           width: 75%;
-          background: hsl(165, 95%, 43%);
+          background-color: var(--sage-green);
           color: white;
 
           &:hover {
-            background: hsl(165, 95%, 53%);;
+            background-color: var(--yellow-green);
           }
         }
 
         &.cancel-btn {
           width: 25%;
-          background: hsl(0, 90%, 50%);
+          background-color: var(--red);
           color: white;
 
           &:hover {
-            background: hsl(4, 90%, 40%);
+            background-color: var(--bright-red);
           }
         }
 

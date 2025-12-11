@@ -19,9 +19,9 @@ li {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 0.5rem;
 
   h3 {
-    margin: 0 0 12px 0;
     font-size: 18px;
     font-weight: 600;
     color: #222;
@@ -63,16 +63,15 @@ li {
     }
 
     &.active {
-      border: 1px solid hsl(165, 95%, 43%);
-      background-color: hsl(165, 95%, 43%);
-      color: hsl(0, 0%, 100%);
+      border: 1px solid var(--sage-green);
+      background-color: var(--sage-green);
+      color: hsl(0, 0%, 95%);
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px hsla(165, 95%, 43%, 0.3);
 
       &:hover {
-        background-color: hsl(165, 95%, 53%);
-        border-color: hsl(165, 95%, 53%);
+        background-color: var(--yellow-green);
+        border-color: var(--yellow-green);
         transform: translateY(-2px);
       }
 

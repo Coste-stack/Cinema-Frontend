@@ -15,24 +15,12 @@
 }
 
 :host {
-  --color-1: oklch(0.175 0.032 165.0);
-  --color-2: oklch(0.206 0.045 165.0);
-  --color-3: oklch(0.269 0.083 165.0);
-  --color-4: oklch(0.318 0.113 165.0);
-  --color-5: oklch(0.363 0.138 165.0);
-  --color-6: oklch(0.413 0.161 165.0);
-  --color-7: oklch(0.480 0.183 165.0);
-  --color-8: oklch(0.566 0.202 165.0);
-  --color-9: oklch(0.609 0.192 165.0);
-  --color-10: oklch(0.662 0.178 165.0);
-  --color-11: oklch(0.831 0.115 165.0);
-  --color-12: oklch(0.912 0.068 165.0);
-
-  --hunter-green: #386641ff;
-  --sage-green: #6a994eff;
-  --yellow-green: #a7c957ff;
-  --vanilla-cream: #f2e8cfff;
-  --blushed-brick: #bc4749ff;
+  --hunter-green: hsl(132, 29%, 31%);
+  --sage-green: hsl(98, 32%, 45%);
+  --yellow-green: hsl(78, 51%, 56%);
+  --vanilla-cream: hsl(43, 57%, 88%);
+  --red: hsl(359, 47%, 51%);
+  --bright-red: hsl(3, 85%, 53%);
 }
 
 h1 {

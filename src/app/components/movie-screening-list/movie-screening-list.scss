@@ -76,12 +76,12 @@ button.screening-item {
   transition: transform 250ms cubic-bezier(.2,.9,.2,1), background-color 180ms ease;
 
   &:hover {
-    background-color: var(--blushed-brick);
+    background-color: var(--red);
     transform: translateY(2px);
   }
 
   &:focus {
-    outline: 2px solid var(--blushed-brick);
+    outline: 2px solid var(--red);
     outline-offset: 2px;
     transform: translateY(2px);
   }

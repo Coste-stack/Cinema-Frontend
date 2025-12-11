@@ -60,12 +60,12 @@
               cursor: pointer;
 
               &:hover {
-                border-color: hsl(165, 95%, 43%);
+                border-color: var(--sage-green);
               }
 
               &:focus {
                 outline: none;
-                border-color: hsl(165, 95%, 43%);
+                border-color: var(--sage-green);
               }
             }
           }
@@ -122,21 +122,21 @@
 
         &.confirm-btn {
           width: 75%;
-          background: hsl(165, 95%, 43%);
+          background-color: var(--sage-green);
           color: white;
 
           &:hover {
-            background: hsl(165, 95%, 53%);;
+            background-color: var(--yellow-green);
           }
         }
 
         &.cancel-btn {
           width: 25%;
-          background: hsl(0, 90%, 50%);
+          background-color: var(--red);
           color: white;
 
           &:hover {
-            background: hsl(4, 90%, 40%);
+            background-color: var(--bright-red);
           }
         }
 
