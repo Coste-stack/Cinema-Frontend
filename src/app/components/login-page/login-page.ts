@@ -8,7 +8,7 @@ import { AuthFormBase } from '../helpers/auth-form-base';
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login-page.html',
-  styleUrls: ['../helpers/user-auth-form.scss', './login-page.scss'],
+  styleUrls: ['../helpers/user-auth-form.scss', '../helpers/auth-form.scss','./login-page.scss'],
 })
 export class LoginPage extends AuthFormBase {
   private router = inject(Router);

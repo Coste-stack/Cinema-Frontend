@@ -9,12 +9,12 @@ header {
   }
 
   nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: stretch;
-    justify-content: space-between;
 
-    @media (max-width: 480px) {
-      flex-wrap: wrap;
+    @media (max-width: 314px) {
+      grid-template-columns: 1fr; /* stack items */
     }
   }
 }
@@ -49,7 +49,7 @@ section {
 
 #logo-section {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: end;
   gap: 0.5rem;
 
@@ -68,12 +68,15 @@ section {
 
 #user-section {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: end;
   gap: 0.5rem;
 }
 
 #page-section {
+  @media (min-width: 800px) {
+    margin-left: 2.5rem;
+  }
   @media (max-width: 314px) {
     order: 3;
   }
