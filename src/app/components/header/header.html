@@ -1,13 +1,63 @@
 <header class="header">
   <nav>
-    <span routerLink="/">Kino</span>
-    <span routerLink="/repertuar">Repertuar</span>
-    @if (!isUser()) {
-    <span routerLink="/login">Login</span>
-    <span routerLink="/register">Register</span>
-    } @else {
-      <span routerLink="/user">User</span>
-      <span (click)="onLogout()">Logout</span>
-    }
+    <section id="logo-section">
+      <ul>
+        <li>
+          <a routerLink="/">
+            <div class="icon">
+              <app-movie-svg></app-movie-svg>
+            </div>
+            <div class="text">
+              <h2>Kino</h2>
+              <h2>Next</h2>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="page-section">
+      <ul>
+        <li>
+          <a routerLink="/repertuar">
+            <h2>Repertuar</h2>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="user-section">
+      <ul>
+        @if (!isUser()) {
+          <li>
+            <a routerLink="/login">
+              <div class="icon">
+                <app-user-svg></app-user-svg>
+              </div>
+              <h2>Login</h2>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/register">
+              <h2>Register</h2>
+            </a>
+          </li>
+        } @else {
+          <li>
+            <a routerLink="/user">
+              <div class="icon">
+                <app-user-svg></app-user-svg>
+              </div>
+              <h2>User</h2>
+            </a>
+          </li>
+          <li>
+            <a (click)="onLogout()">
+              <h2>Logout</h2>
+            </a>
+          </li>
+        }
+      </ul>
+    </section>
   </nav>
 </header>

@@ -3,15 +3,92 @@ header {
 
   nav {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
+  }
+}
 
-    > span {
-      cursor: pointer;
+section {
+  display: flex;
+  justify-content: space-between;
+}
 
-      &:hover {
-        color: var(--gray-700);
+.icon {
+  display: inline-flex;
+  align-self: end;
+
+  app-movie-svg,
+  app-user-svg {
+    width: 40px;
+    height: 40px;
+    display: block;
+
+    ::ng-deep svg path {
+      fill: var(--sage-green);
+    }
+  }
+}
+
+#logo-section {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 0.5rem;
+
+  .text {
+    h2 {
+      &:first-child {
+        color: hsl(0, 0%, 0%);
+      }
+
+      &:last-child {
+        color: var(--sage-green);
       }
     }
+  }
+}
+
+#user-section {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+.text,
+h2 {
+  display: inline-flex;
+  align-self: end;
+}
+
+h2 {
+  font-weight: 600;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: hsl(0, 0%, 0%);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+a,
+button {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: var(--gray-700);
   }
 }

@@ -1,0 +1,15 @@
+import { Component } from '@angular/core';
+
+@Component({
+  standalone: true,
+  selector: 'app-movie-svg',
+  templateUrl: '../../../../assets/movie.svg',
+  styleUrls: ['./movie-svg.component.css']
+})
+export class MovieSvgComponent {
+  fillColor = 'hsl(0, 0%, 0%)';
+
+  changeColor(h: number, s: number, l: number) {
+    this.fillColor = `rgb(${h}, ${s}%, ${l}%)`;
+  }
+}

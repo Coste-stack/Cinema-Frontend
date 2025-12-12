@@ -2,10 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TokenService } from '../../services/token-service';
 import { AuthService } from '../../services/auth-service';
+import { MovieSvgComponent } from '../svg/movie-svg/movie-svg.component';
+import { UserSvgComponent } from '../svg/user-svg/user-svg.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, MovieSvgComponent, UserSvgComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
