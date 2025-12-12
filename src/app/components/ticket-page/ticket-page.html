@@ -34,14 +34,15 @@
       <div class="user-info">
         <form [formGroup]="userForm" class="contact-form">
           @if (emailInputEnabled) {
-            <label for="email">Adres e-mail</label>
-            <input
-              id="email"
-              type="email"
-              formControlName="email"
-              placeholder="Email"
-            />
-            <div class="error">{{ userFormError() }}</div>
+            <div class="form-control">
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="Email"
+              />
+              <p class="error">{{ userFormError() }}</p>
+            </div>
           }
         </form>
       </div>

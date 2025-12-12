@@ -10,7 +10,7 @@ import { TokenService } from '../../services/token-service';
   selector: 'app-ticket-page',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './ticket-page.html',
-  styleUrl: './ticket-page.scss',
+  styleUrls: ['../helpers/auth-form.scss', './ticket-page.scss'],
 })
 export class TicketPage extends BaseBooking implements OnInit {
   private formBuilder = inject(FormBuilder);

@@ -29,24 +29,13 @@ form {
   flex-direction: column;
   gap: 0.5rem;
 
-  input {
-    padding: 0.5rem 1rem;
-    background-color: hsl(0, 0%, 90%);
-    border-radius: 4px;
-  }
-
   .form-control {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-
     &#forgot-password {
       display: flex;
       align-items: flex-end;
     }
 
     .error {
-      color: var(--red);
       align-self: flex-start;
     }
   }
