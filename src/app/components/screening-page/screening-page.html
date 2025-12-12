@@ -1,35 +1,39 @@
-<app-screening-map-display
-  [screening]="screening()"
-  [loading]="loading()"
-  [error]="error()"
-  [selectedSeatIds]="selectedSeatIds()"
-  (seatToggle)="onSeatToggle($event)" >
+<div id="screening-page-container">
 
-  <div id="selected-seats-container">
-    <div id="selected-seats-info">
-      <h3>Wybrano {{ selectedSeats().length }} </h3>
-      @if (selectedSeats().length > 0) {
-        <ul>
-          @for (group of groupedSelectedSeats(); track group.row) {
-            @if (group.numbers.length === 1) {
-              <li>Rząd: <strong>{{ group.row }}</strong> Miejsce: <strong>{{ group.numbers[0] }}</strong></li>
-            } @else {
-              <li>Rząd: <strong>{{ group.row }}</strong> Siedzenia: <strong>{{ group.numbers.join(', ') }}</strong></li>
+  <app-screening-map-display
+    [screening]="screening()"
+    [loading]="loading()"
+    [error]="error()"
+    [selectedSeatIds]="selectedSeatIds()"
+    (seatToggle)="onSeatToggle($event)" >
+
+    <div id="selected-seats-container">
+      <div id="selected-seats-info">
+        <h3>Wybrano {{ selectedSeats().length }} </h3>
+        @if (selectedSeats().length > 0) {
+          <ul>
+            @for (group of groupedSelectedSeats(); track group.row) {
+              @if (group.numbers.length === 1) {
+                <li>Rząd: <strong>{{ group.row }}</strong> Miejsce: <strong>{{ group.numbers[0] }}</strong></li>
+              } @else {
+                <li>Rząd: <strong>{{ group.row }}</strong> Siedzenia: <strong>{{ group.numbers.join(', ') }}</strong></li>
+              }
             }
-          }
-        </ul>
-        <div id="selected-seats-confirm">
-          <button class="active" (click)="confirmSeats()">
-            Potwierdź miejsca
-          </button>
-        </div>
-      } @else {
-        <div id="selected-seats-confirm">
-          <button class="disabled">
-            Potwierdź miejsca
-          </button>
-        </div>
-      }
+          </ul>
+          <div id="selected-seats-confirm">
+            <button class="active" (click)="confirmSeats()">
+              Potwierdź miejsca
+            </button>
+          </div>
+        } @else {
+          <div id="selected-seats-confirm">
+            <button class="disabled">
+              Potwierdź miejsca
+            </button>
+          </div>
+        }
+      </div>
     </div>
-  </div>
-</app-screening-map-display>
+  </app-screening-map-display>
+
+</div>

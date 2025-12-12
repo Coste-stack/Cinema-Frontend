@@ -1,7 +1,14 @@
 .seat {
   box-sizing: border-box;
   aspect-ratio: 1;
-  width: clamp(2.5rem, 4vw, 3rem);
+  width: 2.5rem;
+  @media (max-width: 800px) {
+    width: 2rem;
+  }
+  @media (max-width: 420px) {
+    width: 1.5rem;
+    margin: 2px;
+  }
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;

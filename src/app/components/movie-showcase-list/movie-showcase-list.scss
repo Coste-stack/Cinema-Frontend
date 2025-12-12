@@ -1,22 +1,31 @@
-.movie-list {
-  padding: 2rem;
+:host {
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .movies-container {
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   gap: 1.5rem;
-  margin-top: 1rem;
+  @media (max-width: 800px) {
+    gap: 0.5rem;
+  }
   overflow-x: auto;
 }
 
 .movie-card {
+  box-sizing: border-box;
   min-height: 150px;
   border: 1px solid var(--gray-400);
   border-radius: 8px;
   padding: 1.5rem;
   background: white;
+  min-width: 200px;
   flex: 0 0 300px;
   display: flex;
   flex-direction: column;

@@ -6,26 +6,30 @@
   <p class="error">{{ error() }}</p>
 }
 
-<h2> Register account </h2>
+<div id="register-container">
 
-<form [formGroup]="userForm" (ngSubmit)="submit()" class="form">
+  <h2> Register account </h2>
 
-  <div class="form-control">
-    <label for="email">Email</label>
-    <input id="email" formControlName="email" placeholder="Email" />
-  </div>
-  <div class="form-control">
-    <label for="password">Password</label>
-    <input id="password" formControlName="password" placeholder="Password" />
-  </div>
+  <form [formGroup]="userForm" (ngSubmit)="submit()" class="form">
 
-  <button class="form-submit-btn" type="submit">Submit</button>
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" placeholder="Email" />
+    </div>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" placeholder="Password" />
+    </div>
 
-  <div class="form-control" id="already-registered">
-    <p> Already have an account? </p>
-    <a routerLink="/login">
-      Login!
-    </a>
-  </div>
+    <button class="form-submit-btn" type="submit">Submit</button>
 
-</form>
+    <div class="form-control" id="already-registered">
+      <p> Already have an account? </p>
+      <a routerLink="/login">
+        Login!
+      </a>
+    </div>
+
+  </form>
+
+</div>

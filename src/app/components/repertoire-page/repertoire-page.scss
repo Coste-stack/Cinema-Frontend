@@ -1,5 +1,10 @@
 :host {
-  display: block;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+:host > * {
   width: max(750px, 50vw);
   box-sizing: border-box;
 }

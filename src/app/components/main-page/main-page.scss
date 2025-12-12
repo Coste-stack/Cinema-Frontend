@@ -1,0 +1,7 @@
+:host {
+  padding: clamp(0rem, 2.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}

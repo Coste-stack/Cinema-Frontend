@@ -1,5 +1,15 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
 .movie-list {
   padding: 2rem;
+  @media (max-width: 800px) {
+    padding: 1rem;
+  }
   width: 100%;
   box-sizing: border-box;
 }

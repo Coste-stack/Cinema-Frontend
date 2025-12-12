@@ -6,31 +6,35 @@
   <p class="error">{{ error() }}</p>
 }
 
-<h2> Login to account </h2>
+<div id="login-container">
 
-<form [formGroup]="userForm" (ngSubmit)="submit()" class="form">
+  <h2> Login to account </h2>
 
-  <div class="form-control">
-    <label for="email">Email</label>
-    <input  id="email" formControlName="email" placeholder="Email" />
-  </div>
-  <div class="form-control">
-    <label for="password">Password</label>
-    <input id="password" formControlName="password" placeholder="Password" />
-  </div>
-  <div class="form-control" id="forgot-password">
-    <a routerLink="/register">
-      Forgot Password
-    </a>
-  </div>
+  <form [formGroup]="userForm" (ngSubmit)="submit()" class="form">
 
-  <button class="form-submit-btn" type="submit">Submit</button>
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input  id="email" formControlName="email" placeholder="Email" />
+    </div>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" placeholder="Password" />
+    </div>
+    <div class="form-control" id="forgot-password">
+      <a routerLink="/register">
+        Forgot Password
+      </a>
+    </div>
 
-  <div class="form-control" id="not-registered">
-    <p> Not a member? </p>
-    <a routerLink="/register">
-      Create new account!
-    </a>
-  </div>
+    <button class="form-submit-btn" type="submit">Submit</button>
 
-</form>
+    <div class="form-control" id="not-registered">
+      <p> Not a member? </p>
+      <a routerLink="/register">
+        Create new account!
+      </a>
+    </div>
+
+  </form>
+
+</div>
