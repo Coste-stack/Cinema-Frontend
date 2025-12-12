@@ -1,10 +1,21 @@
 header {
   padding: 1rem 3rem;
 
+  @media (max-width: 800px) {
+    padding: 0.75rem 1rem;
+  }
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.75rem;
+  }
+
   nav {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+
+    @media (max-width: 480px) {
+      flex-wrap: wrap;
+    }
   }
 }
 
@@ -19,9 +30,16 @@ section {
 
   app-movie-svg,
   app-user-svg {
+    aspect-ratio: 1;
     width: 40px;
-    height: 40px;
     display: block;
+
+    @media (max-width: 800px) {
+      width: 32px;
+    }
+    @media (max-width: 480px) {
+      width: 28px;
+    }
 
     ::ng-deep svg path {
       fill: var(--sage-green);
@@ -55,6 +73,12 @@ section {
   gap: 0.5rem;
 }
 
+#page-section {
+  @media (max-width: 314px) {
+    order: 3;
+  }
+}
+
 .text,
 h2 {
   display: inline-flex;
@@ -63,6 +87,10 @@ h2 {
 
 h2 {
   font-weight: 600;
+
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
 }
 
 ul {
@@ -70,6 +98,10 @@ ul {
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    gap: 0.25rem;
+  }
 }
 
 a {
@@ -86,6 +118,10 @@ a,
 button {
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
+
+  @media (max-width: 480px) {
+    padding: 0.2rem 0.4rem;
+  }
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
