@@ -1,14 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
 export class LoginPage {
+  private router = inject(Router);
   private authService = inject(AuthService);
   loading = signal(false);
   error = signal<string | null>(null);
@@ -43,6 +45,8 @@ export class LoginPage {
 
           // Update token in service
           this.authService.setLocalToken(token, expires);
+
+          this.router.navigate(['/user']);
         },
         error: (err) => {
           console.error('Error logging in:', err);
