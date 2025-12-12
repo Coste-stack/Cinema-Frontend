@@ -6,24 +6,38 @@
   <p class="error">{{ error() }}</p>
 }
 
-<div id="register-container">
+<div id="user-container">
 
   <h2> Register account </h2>
 
   <form [formGroup]="userForm" (ngSubmit)="submit()" class="form">
 
     <div class="form-control">
-      <label for="email">Email</label>
       <input id="email" formControlName="email" placeholder="Email" />
+      @if (userForm.get('email')?.invalid && (userForm.get('email')?.touched)) {
+        <div class="error">
+          @if (userForm.get('email')?.errors?.['required']) {
+            <p>Email is required</p>
+          } @else if (userForm.get('email')?.errors?.['email']) {
+            <p>Enter a valid email</p>
+          }
+        </div>
+      }
     </div>
     <div class="form-control">
-      <label for="password">Password</label>
       <input id="password" formControlName="password" placeholder="Password" />
+      @if (userForm.get('password')?.invalid && (userForm.get('password')?.touched)) {
+        <div class="error">
+          @if (userForm.get('password')?.errors?.['required']) {
+            <p>Password is required</p>
+          }
+        </div>
+      }
     </div>
 
     <button class="form-submit-btn" type="submit">Submit</button>
 
-    <div class="form-control" id="already-registered">
+    <div class="form-control" id="bottom-route">
       <p> Already have an account? </p>
       <a routerLink="/login">
         Login!

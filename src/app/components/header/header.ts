@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TokenService } from '../../services/token-service';
 import { AuthService } from '../../services/auth-service';
 import { MovieSvgComponent } from '../svg/movie-svg/movie-svg.component';
@@ -12,6 +12,7 @@ import { UserSvgComponent } from '../svg/user-svg/user-svg.component';
   styleUrl: './header.scss',
 })
 export class Header implements OnInit {
+  private router = inject(Router);
   private tokenService = inject(TokenService);
   private authService = inject(AuthService);
   isUser = signal<boolean>(false);
@@ -29,6 +30,7 @@ export class Header implements OnInit {
 
   onLogout(): void {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }
