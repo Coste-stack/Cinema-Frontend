@@ -1,0 +1,57 @@
+@if (loading()) {
+  <p>Loading bookings...</p>
+}
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<div id="booking-list">
+  @for (booking of userBookings(); track booking.id) {
+    <div class="booking">
+      <div class="booking-top">
+        <h3>Booking #{{ booking.id }}</h3>
+        <p class="booking-total">
+          <strong>Total:</strong>
+          {{ totalBookingPrice(booking.id) }}PLN
+        </p>
+      </div>
+
+      <div class="screening">
+        <p><strong>Movie:</strong> {{ booking.screening.movie.title }}</p>
+        <p><strong>Start:</strong> {{ booking.screening.startTime }}</p>
+        <p><strong>End:</strong> {{ booking.screening.endTime }}</p>
+        <p>
+          <strong>Projection:</strong> {{ booking.screening.projectionType }}
+          @if (booking.screening.language) { <span>· {{ booking.screening.language }}</span> }
+        </p>
+      </div>
+
+      <button
+        class="booking-separator"
+        (click)="toggleTickets(booking.id)"
+      >
+        <span class="icon">
+          {{ isCollapsed(booking.id) ? 'Show tickets ▸' : 'Hide tickets ▾' }}
+        </span>
+      </button>
+
+      <div
+        class="ticket-list"
+        [class.collapsed]="isCollapsed(booking.id)"
+        [attr.aria-hidden]="isCollapsed(booking.id) ? 'true' : 'false'"
+      >
+        @for (ticket of booking.tickets; track ticket.id) {
+          <div class="ticket">
+            <div class="ticket-top">
+              <p><strong>Person:</strong> {{ ticket.personType }}</p>
+              <p><strong>Price:</strong> {{ ticket.totalPrice }}</p>
+            </div>
+            <p><strong>Seat:</strong> Row {{ ticket.seat.row }}, Number {{ ticket.seat.number }} ({{ ticket.seat.seatType }})</p>
+            <p><strong>Type:</strong> {{ ticket.seat.seatType }} </p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
