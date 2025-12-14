@@ -1,1 +1,47 @@
-<p>user-settings works!</p>
+@if (loading()) {
+  <p>Loading user settings...</p>
+}
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<div id="user-settings">
+
+  <section id="email-section">
+    <div class="form-control">
+      <input id="email" value="{{ email() }}" disabled>
+    </div>
+  </section>
+
+  <section id="password-section">
+    <h2> Change password </h2>
+    <form [formGroup]="passwordForm" class="password-form" (ngSubmit)="submitPasswordForm()">
+      <div class="form-control">
+        <input
+          id="text" type="text"
+          formControlName="password"
+          value=""
+          placeholder="New password"
+        >
+        <input
+          id="text" type="text"
+          formControlName="confirmPassword"
+          value=""
+          placeholder="Confirm password"
+        >
+      </div>
+      @if (passwordFormError()) {
+        <p class="error"> {{ passwordFormError() }} </p>
+      }
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="loading()"
+      >
+        Change Password
+      </button>
+    </form>
+  </section>
+
+</div>

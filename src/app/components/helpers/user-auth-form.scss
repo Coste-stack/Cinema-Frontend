@@ -25,18 +25,10 @@
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
   .form-control {
     &#forgot-password {
       display: flex;
       align-items: flex-end;
-    }
-
-    .error {
-      align-self: flex-start;
     }
   }
 
@@ -55,11 +47,6 @@ form {
     }
   }
 
-  a,
-  p {
-    font-size: 0.8rem;
-  }
-
   a {
     text-decoration: none;
     color: hsl(0, 0%, 0%);
@@ -72,26 +59,5 @@ form {
     &:hover {
       color: var(--sage-green);
     }
-  }
-}
-
-button.form-submit-btn {
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  background-color: var(--sage-green);
-  color: hsl(0, 0%, 100%);
-  transition: all 0.2s ease;
-  transform: translateY(0);
-
-  &:hover {
-    background-color: var(--yellow-green);
-    transform: translateY(-2px);
   }
 }
