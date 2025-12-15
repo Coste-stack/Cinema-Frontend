@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-fail',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './booking-fail-page.html',
   styleUrl: './booking-fail-page.scss',
 })

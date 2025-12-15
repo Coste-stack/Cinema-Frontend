@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SelectedSeat } from '../../models/screening.model';
 import { BookingRequest, TicketRequest, TicketType, ticketTypes } from '../../models/ticket.model';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BaseBooking } from '../helpers/base-booking';
 import { TokenService } from '../../services/token-service';
 
 @Component({
   selector: 'app-ticket-page',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './ticket-page.html',
   styleUrls: ['../helpers/auth-form.scss', './ticket-page.scss'],
 })

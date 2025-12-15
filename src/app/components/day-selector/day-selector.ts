@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit, OnDestroy, inject } from '@angular/core';
 
 @Component({
   selector: 'app-day-selector',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './day-selector.html',
   styleUrl: './day-selector.scss',
 })

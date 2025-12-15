@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BookingRequest } from '../../models/ticket.model';
-import { CommonModule } from '@angular/common';
+
 import { BookingService } from '../../services/booking-service';
 import { BaseBooking } from '../helpers/base-booking';
 import { finalize, Observable, tap, throwError } from 'rxjs';
@@ -8,7 +8,7 @@ import { PayuRequest } from '../../models/payu.model';
 
 @Component({
   selector: 'app-booking-page',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './booking-page.html',
   styleUrl: './booking-page.scss',
 })
