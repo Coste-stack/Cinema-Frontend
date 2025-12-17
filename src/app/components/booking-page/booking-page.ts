@@ -16,7 +16,6 @@ export class BookingPage extends BaseBooking implements OnInit {
   private bookingService = inject(BookingService);
 
   bookingRequest: BookingRequest | null = null;
-  bookingId: number | null = null;
   userEmail: string | null = null;
 
   ngOnInit(): void {

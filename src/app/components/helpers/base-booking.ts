@@ -1,7 +1,7 @@
 import { inject, signal, Directive } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectedSeat } from '../../models/screening.model';
-import { TicketBulkPriceRequest, TicketBulkPriceResponse, TicketPriceRequest, TicketType, ticketTypes } from '../../models/ticket.model';
+import { BookingPriceRequest, BookingPriceResponse, TicketPriceRequest, TicketType, ticketTypes } from '../../models/ticket.model';
 import { PriceService } from '../../services/price-service';
 
 @Directive()
@@ -11,8 +11,9 @@ export abstract class BaseBooking {
 
   selectedSeats = signal<SelectedSeat[]>([]);
   screeningId: number | null = null;
+  bookingId: number | null = null;
   seatTicketTypes = signal<Record<number, TicketType>>({});
-  ticketsPrice: TicketBulkPriceResponse | null = null;
+  ticketsPrice: BookingPriceResponse | null = null;
 
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
@@ -58,6 +59,29 @@ export abstract class BaseBooking {
     return ticket ? ticket.price : -1;
   }
 
+  getSubtotal(): number {
+    // Sum ticket prices
+    if (this.ticketsPrice === null || !this.ticketsPrice.ticketPrices) return -1;
+    return this.ticketsPrice.ticketPrices.reduce((sum, t) => sum + (t.price ?? 0), 0);
+  }
+
+  getAppliedOffers() {
+    return this.ticketsPrice?.appliedOffers ?? [];
+  }
+
+  getTotalDiscount(): number {
+    if (this.ticketsPrice === null) return 0;
+
+    // Get discount from response object
+    const offers = this.getAppliedOffers();
+    if (offers.length > 0) return offers.reduce((s, o) => s + (o.discountAmount ?? 0), 0);
+
+    // Get discount from subtracting
+    const subtotal = this.getSubtotal();
+    const total = this.ticketsPrice.totalPrice ?? subtotal;
+    return Math.max(0, subtotal - total);
+  }
+
   getTotalPrice(): number {
     if (this.ticketsPrice === null || !this.ticketsPrice.ticketPrices) {
       return -1;
@@ -88,22 +112,26 @@ export abstract class BaseBooking {
       personTypeName: this.getTicketType(seat.id),
     }));
 
-    const ticketBulkPriceRequest: TicketBulkPriceRequest = {
+    const ticketBulkPriceRequest: BookingPriceRequest = {
+      bookingId: this.bookingId ?? 0,
       screeningId: this.screeningId,
       tickets: tickets,
+      ...(this.bookingId !== null ? { bookingId: this.bookingId } : {})
     };
+
+    console.log('Sending booking prices request:', ticketBulkPriceRequest);
 
     this.priceService.getBulkPrice(ticketBulkPriceRequest)
       .subscribe({
         next: (response) => {
-          console.log('Successfully received bulk price response:', response);
+          console.log('Successfully received booking prices response:', response);
           this.ticketsPrice = response;
           this.loading.set(false);
         },
         error: (err) => {
-          this.error.set('Failed to load bulk price');
+          this.error.set('Failed to load booking prices');
           this.loading.set(false);
-          console.error('Error loading bulk price:', err);
+          console.error('Error loading booking prices:', err);
         }
       });
   }

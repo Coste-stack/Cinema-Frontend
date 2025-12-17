@@ -6,7 +6,7 @@
       <div class="ticket-summary">
         <ul>
           @for (seat of selectedSeats(); track seat.id) {
-            <li>
+            <li class="ticket">
               <div class="seat-info">
                 <span>Rząd: <strong>{{ seat.row }}</strong> Miejsce: <strong>{{ seat.number }}</strong></span>
               </div>
@@ -26,7 +26,20 @@
             </li>
           }
           <li class="total-price-info">
-            <span> Total price: {{ getTotalPrice() }}zł</span>
+            @if (getAppliedOffers().length > 0) {
+              <div class="discounts">
+                @for (offer of getAppliedOffers(); track offer.offerId) {
+                  <div class="offer-pill">
+                    <span class="offer-name">{{ offer.offerName }}: </span>
+                    <span class="offer-amount">-{{ offer.discountAmount }}zł</span>
+                  </div>
+                }
+              </div>
+            }
+            <div class="price-breakdown">
+              <div class="subtotal">Bez rabatu: <strong>{{ getSubtotal() }}zł</strong></div>
+              <div class="total">Finalnie: <strong>{{ getTotalPrice() }}zł</strong></div>
+            </div>
           </li>
         </ul>
       </div>
