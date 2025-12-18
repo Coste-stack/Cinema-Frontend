@@ -11,19 +11,38 @@
     <div class="booking">
       <div class="booking-top">
         <h3>Booking #{{ booking.id }}</h3>
-        <p class="booking-total">
-          <strong>Total:</strong>
-          {{ totalBookingPrice(booking.id) }}PLN
-        </p>
+        <div class="booking-total">
+          <div class="total-discounted">
+            <strong>Total:</strong>
+            <span class="price">
+              {{ getTotalPrice(booking.id) }} PLN
+            </span>
+          </div>
+          <div class="total-base">
+            (was {{ getSubtotalPrice(booking.id) }} PLN)
+          </div>
+        </div>
       </div>
 
       <div class="screening">
-        <p><strong>Movie:</strong> {{ booking.screening.movie.title }}</p>
-        <p><strong>Start:</strong> {{ booking.screening.startTime }}</p>
-        <p><strong>End:</strong> {{ booking.screening.endTime }}</p>
         <p>
-          <strong>Projection:</strong> {{ booking.screening.projectionType }}
-          @if (booking.screening.language) { <span>· {{ booking.screening.language }}</span> }
+          <strong>Movie:</strong>
+          {{ booking.screening.movie.title }}
+        </p>
+        <p>
+          <strong>Start:</strong>
+          {{ booking.screening.startTime }}
+        </p>
+        <p>
+          <strong>End:</strong>
+          {{ booking.screening.endTime }}
+        </p>
+        <p>
+          <strong>Projection:</strong>
+          {{ booking.screening.projectionType }}
+          @if (booking.screening.language) {
+            <span> {{ booking.screening.language }}</span>
+          }
         </p>
       </div>
 
@@ -44,11 +63,21 @@
         @for (ticket of booking.tickets; track ticket.id) {
           <div class="ticket">
             <div class="ticket-top">
-              <p><strong>Person:</strong> {{ ticket.personType }}</p>
-              <p><strong>Price:</strong> {{ ticket.totalPrice }}</p>
+              <p class="person"><strong>Person:</strong> {{ ticket.personType }}</p>
+              <p class="price">
+                {{ getTicketPrice(booking.id, ticket.id) }} PLN
+              </p>
             </div>
-            <p><strong>Seat:</strong> Row {{ ticket.seat.row }}, Number {{ ticket.seat.number }} ({{ ticket.seat.seatType }})</p>
-            <p><strong>Type:</strong> {{ ticket.seat.seatType }} </p>
+            <p class="seat">
+              <strong>Seat:</strong>
+              Row {{ ticket.seat.row }},
+              Number {{ ticket.seat.number }}
+              ({{ ticket.seat.seatType }})
+            </p>
+            <p class="type">
+              <strong>Type:</strong>
+              {{ ticket.seat.seatType }}
+            </p>
           </div>
         }
       </div>

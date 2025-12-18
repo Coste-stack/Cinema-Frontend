@@ -2,6 +2,8 @@ import { Genre, MovieRating } from "./movie.model";
 
 export interface UserBooking {
   id: number;
+  basePrice: number;
+  discountedPrice: number;
   tickets: UserTicket[];
   screening: UserScreening;
 }

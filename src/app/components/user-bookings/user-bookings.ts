@@ -1,6 +1,6 @@
-import { Component, inject, Input, input, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BookingService } from '../../services/booking-service';
-import { UserBooking } from '../../models/booking.model';
+import { UserBooking, UserTicket } from '../../models/booking.model';
 
 @Component({
   selector: 'app-user-bookings',
@@ -17,6 +17,46 @@ export class UserBookings {
 
   // Track collapsed (hidden) ticket lists per booking id
   collapsedBookings = signal<Record<number, boolean>>({});
+
+  private getBookingById(bookingId: number): UserBooking | undefined{
+    const bookings = this.userBookings();
+    const booking = bookings?.find(b => b.id === bookingId);
+    return booking;
+  }
+
+  private getTicketById(bookingId: number, ticketId: number): UserTicket | undefined{
+    const booking = this.getBookingById(bookingId);
+    const ticket = booking?.tickets.find(t => t.id === ticketId);
+    return ticket;
+  }
+
+  getTotalDiscount(bookingId: number): number {
+    // From response price
+    const subtotal = this.getSubtotalPrice(bookingId);
+    const total = this.getTotalPrice(bookingId);
+    if (subtotal !== -1 && total !== -1) {
+      return Math.max(0, subtotal - total);
+    }
+    return -1;
+  }
+
+  getSubtotalPrice(bookingId: number): number {
+    const booking = this.getBookingById(bookingId);
+    if (!booking || !booking.basePrice) return -1;
+    return booking.basePrice;
+  }
+
+  getTotalPrice(bookingId: number): number {
+    const booking = this.getBookingById(bookingId);
+    if (!booking || !booking.discountedPrice) return -1;
+    return booking.discountedPrice;
+  }
+
+  getTicketPrice(bookingId: number, ticketId: number): number {
+    const ticket = this.getTicketById(bookingId, ticketId);
+    if (!ticket || !ticket.totalPrice) return -1;
+    return ticket.totalPrice;
+  }
 
   ngOnInit() {
     this.getUserBookings();
