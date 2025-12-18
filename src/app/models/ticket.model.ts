@@ -28,7 +28,8 @@ export interface TicketPriceRequest {
 export interface BookingPriceResponse {
   screeningId: number;
   ticketPrices: TicketPriceResponse[];
-  totalPrice: number;
+  basePrice: number;
+  discountedPrice: number;
   appliedOffers: AppliedOfferResponse[];
 }
 

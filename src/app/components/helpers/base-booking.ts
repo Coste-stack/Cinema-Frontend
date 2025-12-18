@@ -13,7 +13,7 @@ export abstract class BaseBooking {
   screeningId: number | null = null;
   bookingId: number | null = null;
   seatTicketTypes = signal<Record<number, TicketType>>({});
-  ticketsPrice: BookingPriceResponse | null = null;
+  bookingPriceResponse: BookingPriceResponse | null = null;
 
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
@@ -52,41 +52,47 @@ export abstract class BaseBooking {
   }
 
   getPrice(seatId: number): number {
-    if (this.ticketsPrice === null || !this.ticketsPrice.ticketPrices) {
+    if (this.bookingPriceResponse === null || !this.bookingPriceResponse.ticketPrices) {
       return -1;
     }
-    const ticket = this.ticketsPrice.ticketPrices.find(t => t.seatId === seatId);
+    const ticket = this.bookingPriceResponse.ticketPrices.find(t => t.seatId === seatId);
     return ticket ? ticket.price : -1;
   }
 
-  getSubtotal(): number {
-    // Sum ticket prices
-    if (this.ticketsPrice === null || !this.ticketsPrice.ticketPrices) return -1;
-    return this.ticketsPrice.ticketPrices.reduce((sum, t) => sum + (t.price ?? 0), 0);
-  }
-
   getAppliedOffers() {
-    return this.ticketsPrice?.appliedOffers ?? [];
+    return this.bookingPriceResponse?.appliedOffers ?? [];
   }
 
   getTotalDiscount(): number {
-    if (this.ticketsPrice === null) return 0;
+    if (this.bookingPriceResponse === null) return 0;
 
-    // Get discount from response object
+    // From response price
+    const subtotal = this.getSubtotalPrice();
+    const total = this.getTotalPrice();
+    if (subtotal !== -1 && total !== -1) {
+      return Math.max(0, subtotal - total);
+    }
+
+    // From response offers
     const offers = this.getAppliedOffers();
-    if (offers.length > 0) return offers.reduce((s, o) => s + (o.discountAmount ?? 0), 0);
+    if (offers.length > 0) {
+      return offers.reduce((s, o) => s + (o.discountAmount ?? 0), 0);
+    }
+    return -1;
+  }
 
-    // Get discount from subtracting
-    const subtotal = this.getSubtotal();
-    const total = this.ticketsPrice.totalPrice ?? subtotal;
-    return Math.max(0, subtotal - total);
+  getSubtotalPrice(): number {
+    if (this.bookingPriceResponse === null || this.bookingPriceResponse.basePrice == null) {
+      return -1;
+    }
+    return this.bookingPriceResponse.basePrice;
   }
 
   getTotalPrice(): number {
-    if (this.ticketsPrice === null || !this.ticketsPrice.ticketPrices) {
+    if (this.bookingPriceResponse === null || this.bookingPriceResponse.discountedPrice == null) {
       return -1;
     }
-    return this.ticketsPrice.totalPrice ?? -1;
+    return this.bookingPriceResponse.discountedPrice;
   }
 
   cancelBooking(): void {
@@ -125,7 +131,7 @@ export abstract class BaseBooking {
       .subscribe({
         next: (response) => {
           console.log('Successfully received booking prices response:', response);
-          this.ticketsPrice = response;
+          this.bookingPriceResponse = response;
           this.loading.set(false);
         },
         error: (err) => {

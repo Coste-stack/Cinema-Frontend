@@ -81,9 +81,19 @@ export class TicketPage extends BaseBooking implements OnInit {
     }
 
     // Validate user form
-    if (this.emailInputEnabled && this.userForm.invalid) {
-      console.warn('Contact form invalid, cannot proceed');
-      return;
+    if (this.emailInputEnabled) {
+      if (this.userForm.invalid) {
+        if (typeof this.userForm.markAllAsTouched === 'function') {
+          this.userForm.markAllAsTouched();
+        } else {
+          const c = this.userForm.controls && this.userForm.controls['email'];
+          if (c && typeof c.markAsTouched === 'function') {
+            c.markAsTouched();
+          }
+        }
+        console.warn('Contact form invalid, cannot proceed');
+        return;
+      }
     }
 
     // Create booking request dto
