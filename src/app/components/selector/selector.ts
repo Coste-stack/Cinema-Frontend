@@ -2,13 +2,13 @@
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit, OnDestroy, inject } from '@angular/core';
 
 @Component({
-  selector: 'app-day-selector',
+  selector: 'app-selector',
   imports: [],
-  templateUrl: './day-selector.html',
-  styleUrl: './day-selector.scss',
+  templateUrl: './selector.html',
+  styleUrl: './selector.scss',
 })
-export class DaySelector implements AfterViewInit, OnDestroy {
-  @Input() days: Array<{ value: string; label: string }>|undefined;
+export class Selector implements AfterViewInit, OnDestroy {
+  @Input() values: Array<{ value: string; label: string }>|undefined;
   @Input() selected: string|undefined;
   @Output() selectionChange = new EventEmitter<string>();
 
@@ -40,9 +40,9 @@ export class DaySelector implements AfterViewInit, OnDestroy {
     try {
       const hostEl = this.host?.nativeElement as HTMLElement;
       if (!hostEl) return;
-      const container = hostEl.querySelector('.day-selector') as HTMLElement | null;
+      const container = hostEl.querySelector('.selector') as HTMLElement | null;
       const indicator = container?.querySelector('.indicator') as HTMLElement | null;
-      const activeBtn = container?.querySelector('.day-button.active') as HTMLElement | null;
+      const activeBtn = container?.querySelector('button.active') as HTMLElement | null;
       if (!container || !indicator) return;
       if (!activeBtn) {
         indicator.style.display = 'none';
@@ -57,7 +57,7 @@ export class DaySelector implements AfterViewInit, OnDestroy {
       indicator.style.left = left + 'px';
       indicator.style.transform = 'none';
     } catch (e) {
-      console.error('DaySelector.updateIndicator', e);
+      console.error('Selector.updateIndicator', e);
     }
   }
 }

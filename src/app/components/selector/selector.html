@@ -1,0 +1,11 @@
+<nav class="selector">
+  @for (val of values; track val.value) {
+    <button
+      type="button"
+      [class.active]="selected === val.value"
+      (click)="onSelect(val.value)">
+      {{ val.label }}
+    </button>
+  }
+  <div class="indicator" aria-hidden="true"></div>
+</nav>

@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
-import { DaySelector } from '../day-selector/day-selector';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Selector } from '../selector/selector';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../models/movie.model';
 import { MovieScreeningList } from '../movie-screening-list/movie-screening-list';
 
 @Component({
   selector: 'app-repertoire-page',
-  imports: [MovieScreeningList, ReactiveFormsModule, DaySelector],
+  imports: [MovieScreeningList, ReactiveFormsModule, Selector],
   templateUrl: './repertoire-page.html',
   styleUrl: './repertoire-page.scss',
 })

@@ -5,10 +5,10 @@
 
   <h2>Movies</h2>
 
-  <app-day-selector
-    [days]="days"
+  <app-selector
+    [values]="days"
     [selected]="selectedDay()"
     (selectionChange)="onDayChange($event)">
-  </app-day-selector>
+  </app-selector>
 
 </app-movie-screening-list>

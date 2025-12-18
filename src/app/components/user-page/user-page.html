@@ -1,11 +1,8 @@
-<nav>
-  <button (click)="setState('settings')">
-    Settings
-  </button>
-  <button (click)="setState('booking-history')">
-    Booking History
-  </button>
-</nav>
+<app-selector
+  [values]="sections"
+  [selected]="selectedSection()"
+  (selectionChange)="onSectionChange($event)">
+</app-selector>
 
 @if (userPageState() === 'settings') {
   <app-user-settings></app-user-settings>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DaySelector } from './day-selector';
+import { Selector } from './selector';
 
-describe('DaySelector', () => {
-  let component: DaySelector;
-  let fixture: ComponentFixture<DaySelector>;
+describe('Selector', () => {
+  let component: Selector;
+  let fixture: ComponentFixture<Selector>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DaySelector]
+      imports: [Selector]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DaySelector);
+    fixture = TestBed.createComponent(Selector);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

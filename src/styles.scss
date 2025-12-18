@@ -3,3 +3,11 @@
 	padding: 0;
 	border: 0;
 }
+
+main > :not(router-outlet) {
+  box-sizing: border-box;
+  padding: 1rem clamp(0rem, 2.5vw, 2rem);
+  @media (max-width: 800px) {
+    padding: 1rem 1rem;
+  }
+}
