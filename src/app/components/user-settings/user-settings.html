@@ -1,7 +1,3 @@
-@if (loading()) {
-  <p>Loading user settings...</p>
-}
-
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
@@ -9,6 +5,11 @@
 <div id="user-settings">
 
   <section id="email-section">
+    <app-loading-component
+      [visible]="isLoading()"
+      [label]="'User Email'"
+    >
+    </app-loading-component>
     <div class="form-control">
       <input id="email" value="{{ email() }}" disabled>
     </div>
@@ -40,7 +41,7 @@
       <button
         type="submit"
         class="form-submit-btn"
-        [disabled]="loading()"
+        [disabled]="isLoading()"
       >
         Change Password
       </button>

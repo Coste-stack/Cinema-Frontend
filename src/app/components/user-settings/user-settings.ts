@@ -3,20 +3,25 @@ import { UserService } from '../../services/user-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TurnstileService } from '../../services/turnstile-service';
 import { TurnstileDirective } from '../../directives/turnstile-directive';
+import { LoadingService } from '../../services/loading-service';
+import { LoadingComponent } from "../loading-component/loading-component";
 
 @Component({
   selector: 'app-user-settings',
-  imports: [ReactiveFormsModule, TurnstileDirective],
+  imports: [ReactiveFormsModule, TurnstileDirective, LoadingComponent],
   templateUrl: './user-settings.html',
   styleUrls: ['./user-settings.scss', '../helpers/auth-form.scss'],
 })
 export class UserSettings {
   private formBuilder = inject(FormBuilder);
+
   private userService = inject(UserService);
   private turnstileService = inject(TurnstileService);
+  private loadingService = inject(LoadingService);
+  isLoading = this.loadingService.isLoading;
+
   email = signal<string | null>(null);
 
-  loading = signal(false);
   error = signal<string | null>(null);
 
   passwordForm!: FormGroup;
@@ -31,19 +36,19 @@ export class UserSettings {
   }
 
   getEmail(): void {
-    this.loading.set(true);
+    this.loadingService.loadingOn();
     this.error.set(null);
 
     this.userService.getEmail()
     .subscribe({
       next: (response) => {
         this.email.set(response);
-        this.loading.set(false);
+        this.loadingService.loadingOff()
       },
       error: (err) => {
-        this.error.set('Failed to load user email');
-        this.loading.set(false);
         console.error('Error loading user email:', err);
+        this.error.set('Failed to load user email');
+        this.loadingService.loadingOff()
       }
     });
   }
@@ -73,13 +78,13 @@ export class UserSettings {
 
     const newPassword = this.passwordForm.value.password;
 
-    this.loading.set(true);
+    this.loadingService.loadingOn()
     this.error.set(null);
 
     const token = this.turnstileService.getToken();
     if (!token) {
       this.error.set('Please complete the captcha');
-      this.loading.set(false);
+      this.loadingService.loadingOff()
       return;
     }
 
@@ -88,11 +93,11 @@ export class UserSettings {
       next: () => {
         alert('Password updated successfully!');
         this.passwordForm.reset();
-        this.loading.set(false);
+        this.loadingService.loadingOff()
       },
       error: (err) => {
         this.error.set('Failed to update password');
-        this.loading.set(false);
+        this.loadingService.loadingOff()
         console.error('Error updating password:', err);
       }
     });
