@@ -2,13 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BookingRequest } from '../../models/ticket.model';
 
 import { BookingService } from '../../services/booking-service';
+import { TurnstileDirective } from '../../directives/turnstile-directive';
 import { BaseBooking } from '../helpers/base-booking';
 import { finalize, Observable, tap, throwError } from 'rxjs';
 import { PayuRequest } from '../../models/payu.model';
 
 @Component({
   selector: 'app-booking-page',
-  imports: [],
+  imports: [TurnstileDirective],
   templateUrl: './booking-page.html',
   styleUrl: './booking-page.scss',
 })

@@ -15,7 +15,8 @@ export class UserService {
   }
 
   changePassword(password: string): Observable<void> {
-    return this.http.put<void>(`${this.userApiUrl}/password`,
+    return this.http.put<void>(
+      `${this.userApiUrl}/password`,
       JSON.stringify(password),
       { headers: { 'Content-Type': 'application/json' } }
     );

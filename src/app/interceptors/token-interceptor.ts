@@ -3,12 +3,11 @@ import { TokenService } from '../services/token-service';
 import { inject } from '@angular/core';
 import { catchError, finalize, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth-service';
-import { Token } from '../models/auth.model';
 
 let isRefreshing = false;
 let refreshQueue: ((token: string) => void)[] = [];
 
-export const tokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
+export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
   const authService = inject(AuthService);
 

@@ -3,13 +3,14 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { tokenInterceptorInterceptor } from './interceptors/token-interceptor-interceptor';
+import { tokenInterceptor } from './interceptors/token-interceptor';
+import { turnstileInterceptor } from './interceptors/turnstile-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([tokenInterceptorInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, turnstileInterceptor])),
     provideRouter(routes)
   ]
 };

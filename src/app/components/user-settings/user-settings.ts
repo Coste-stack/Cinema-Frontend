@@ -1,16 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { UserService } from '../../services/user-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TurnstileService } from '../../services/turnstile-service';
+import { TurnstileDirective } from '../../directives/turnstile-directive';
 
 @Component({
   selector: 'app-user-settings',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TurnstileDirective],
   templateUrl: './user-settings.html',
   styleUrls: ['./user-settings.scss', '../helpers/auth-form.scss'],
 })
 export class UserSettings {
   private formBuilder = inject(FormBuilder);
   private userService = inject(UserService);
+  private turnstileService = inject(TurnstileService);
   email = signal<string | null>(null);
 
   loading = signal(false);
@@ -72,6 +75,13 @@ export class UserSettings {
 
     this.loading.set(true);
     this.error.set(null);
+
+    const token = this.turnstileService.getToken();
+    if (!token) {
+      this.error.set('Please complete the captcha');
+      this.loading.set(false);
+      return;
+    }
 
     this.userService.changePassword(newPassword)
     .subscribe({
