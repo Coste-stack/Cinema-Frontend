@@ -6,9 +6,8 @@
 
   <section id="email-section">
     <app-loading-component
-      [visible]="isLoading()"
-      [label]="'User Email'"
-    >
+      [visible]="isLoading(emailKey)()"
+      [label]="'User Email'">
     </app-loading-component>
     <div class="form-control">
       <input id="email" value="{{ email() }}" disabled>
@@ -38,10 +37,14 @@
       <div class="form-control">
         <div id="turnstile-password" appTurnstileDirective></div>
       </div>
+      <app-loading-component
+        [visible]="isLoading(passwordKey)()"
+        [label]="'User Password'">
+      </app-loading-component>
       <button
         type="submit"
         class="form-submit-btn"
-        [disabled]="isLoading()"
+        [disabled]="isLoading(passwordKey)()"
       >
         Change Password
       </button>

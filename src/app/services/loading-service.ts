@@ -1,18 +1,30 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadingService {
-  private _isLoading = signal(false);
+  private loaders = new Map<string, WritableSignal<boolean>>;
 
-  readonly isLoading = this._isLoading.asReadonly();
-
-  loadingOn() {
-    this._isLoading.set(true);
+  isLoading(key: string): Signal<boolean> {
+    if (!this.loaders.has(key)) {
+      this.loaders.set(key, signal(false));
+    }
+    return this.loaders.get(key)!;
   }
 
-  loadingOff() {
-    this._isLoading.set(false);
+  loadingOn(key: string) {
+    this.getLoader(key).set(true);
+  }
+
+  loadingOff(key: string) {
+    this.getLoader(key).set(false);
+  }
+
+  private getLoader(key: string): WritableSignal<boolean> {
+    if (!this.loaders.has(key)) {
+      this.loaders.set(key, signal(false));
+    }
+    return this.loaders.get(key)!;
   }
 }

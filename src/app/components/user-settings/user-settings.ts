@@ -17,13 +17,15 @@ export class UserSettings {
 
   private userService = inject(UserService);
   private turnstileService = inject(TurnstileService);
-  private loadingService = inject(LoadingService);
-  isLoading = this.loadingService.isLoading;
 
-  email = signal<string | null>(null);
+  private loadingService = inject(LoadingService);
+  isLoading = (key: string) => this.loadingService.isLoading(key);
+  readonly emailKey: string = "user-email";
+  readonly passwordKey: string = "user-password";
 
   error = signal<string | null>(null);
 
+  email = signal<string>("Email");
   passwordForm!: FormGroup;
 
   ngOnInit() {
@@ -36,19 +38,19 @@ export class UserSettings {
   }
 
   getEmail(): void {
-    this.loadingService.loadingOn();
+    this.loadingService.loadingOn(this.emailKey);
     this.error.set(null);
 
     this.userService.getEmail()
     .subscribe({
       next: (response) => {
         this.email.set(response);
-        this.loadingService.loadingOff()
+        this.loadingService.loadingOff(this.emailKey)
       },
       error: (err) => {
         console.error('Error loading user email:', err);
         this.error.set('Failed to load user email');
-        this.loadingService.loadingOff()
+        this.loadingService.loadingOff(this.emailKey)
       }
     });
   }
@@ -78,13 +80,13 @@ export class UserSettings {
 
     const newPassword = this.passwordForm.value.password;
 
-    this.loadingService.loadingOn()
+    this.loadingService.loadingOn(this.passwordKey)
     this.error.set(null);
 
     const token = this.turnstileService.getToken();
     if (!token) {
       this.error.set('Please complete the captcha');
-      this.loadingService.loadingOff()
+      this.loadingService.loadingOff(this.passwordKey)
       return;
     }
 
@@ -93,11 +95,11 @@ export class UserSettings {
       next: () => {
         alert('Password updated successfully!');
         this.passwordForm.reset();
-        this.loadingService.loadingOff()
+        this.loadingService.loadingOff(this.passwordKey)
       },
       error: (err) => {
         this.error.set('Failed to update password');
-        this.loadingService.loadingOff()
+        this.loadingService.loadingOff(this.passwordKey)
         console.error('Error updating password:', err);
       }
     });
