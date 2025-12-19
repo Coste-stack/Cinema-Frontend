@@ -1,0 +1,9 @@
+<div class="page-container">
+  <h2>Oferty</h2>
+
+  <app-offer-list
+    [offerList]="offerList()"
+    [loading]="isLoading(offersKey)"
+    [error]="error()">
+  </app-offer-list>
+</div>

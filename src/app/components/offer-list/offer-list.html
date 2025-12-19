@@ -1,0 +1,39 @@
+<app-loading-component
+  [visible]="loading"
+  [label]="'Offers'">
+</app-loading-component>
+
+<div id="offer-list">
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (!loading && offerList.length > 0) {
+    <div class="offers-container">
+      @for (offer of offerList; track offer.id) {
+        <div class="item-card">
+          <div class="offer-card">
+            <div class="main">
+              <h3>{{ offer.name }}</h3>
+              <p class="description">{{ offer.description }}</p>
+            </div>
+            <div class="other">
+              <div class="top">
+                @for (effect of getOfferEffects(offer.id); track $index) {
+                  <div class="effect">
+                    <p>{{ effect }}</p>
+                  </div>
+                }
+              </div>
+              <div class="bottom">
+                <p>{{ offer.validFrom | date: 'dd/MM/yyyy' }}</p>
+                <p> - </p>
+                <p>{{ offer.validTo | date: 'dd/MM/yyyy' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

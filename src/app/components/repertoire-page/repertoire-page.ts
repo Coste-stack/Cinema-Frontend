@@ -105,9 +105,9 @@ export class RepertoirePage {
           this.loadingService.loadingOff(this.moviesKey);
         },
         error: (err) => {
+          console.error('Error loading movies:', err);
           this.error.set('Failed to load movies');
           this.loadingService.loadingOff(this.moviesKey);
-          console.error('Error loading movies:', err);
         }
       }
     );

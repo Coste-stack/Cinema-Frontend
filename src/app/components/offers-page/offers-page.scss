@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.page-container {
+  width: max(750px, 50vw);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  overflow-x: auto;
+
+  > * {
+    width: 100%;
+  }
+}
