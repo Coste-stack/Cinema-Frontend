@@ -1,12 +1,13 @@
-@if (loading()) {
-  <p>Loading booking history...</p>
-}
-
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
 <div id="booking-list">
+  <app-loading-component
+    [visible]="isLoading(bookingHistoryKey)"
+    [label]="'Booking History'">
+  </app-loading-component>
+
   @for (booking of userBookings(); track booking.id) {
     <div class="booking">
       <div class="booking-top">

@@ -1,19 +1,23 @@
 import { Component, inject, signal } from '@angular/core';
 import { BookingService } from '../../services/booking-service';
 import { UserBooking, UserTicket } from '../../models/booking.model';
+import { LoadingService } from '../../services/loading-service';
+import { LoadingComponent } from '../loading-component/loading-component';
 
 @Component({
   selector: 'app-user-bookings',
-  imports: [],
+  imports: [LoadingComponent],
   templateUrl: './user-bookings.html',
   styleUrl: './user-bookings.scss',
 })
 export class UserBookings {
   private bookingService = inject(BookingService);
   userBookings = signal<UserBooking[]>([]);
-
-  loading = signal<boolean>(false);
   error = signal<string | null>(null);
+
+  private loadingService = inject(LoadingService);
+  isLoading = (key: string) => this.loadingService.isLoading(key);
+  readonly bookingHistoryKey: string = "user-booking-history";
 
   // Track collapsed (hidden) ticket lists per booking id
   collapsedBookings = signal<Record<number, boolean>>({});
@@ -72,16 +76,18 @@ export class UserBookings {
 
   getUserBookings(): void {
     console.log('UserBookings request');
+    this.loadingService.loadingOn(this.bookingHistoryKey);
     this.bookingService.getMyBookings()
     .subscribe({
       next: (response: UserBooking[]) => {
         console.log('UserBookings response: ', response);
+        this.loadingService.loadingOff(this.bookingHistoryKey);
         this.userBookings.set(response);
       },
       error: (err) => {
-          this.error.set('Failed to load user bookings');
-          this.loading.set(false);
-          console.error('Error loading user bookings:', err);
+        console.error('Error loading user bookings:', err);
+        this.error.set('Failed to load user bookings');
+        this.loadingService.loadingOff(this.bookingHistoryKey);
       }
     });
   }
