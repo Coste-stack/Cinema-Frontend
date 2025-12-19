@@ -1,0 +1,67 @@
+**/.toolstarget
+**/.cache
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/charts
+
+# ================================
+# Node and build output
+# ================================
+node_modules
+build
+dist
+obj
+out-tsc
+.angular
+.cache
+.tmp
+npm-debug.log
+
+# ================================
+# Environment & log files
+# ================================
+*.env*
+!*.env.production
+*.log
+*.tsbuildinfo
+**/secrets.dev.yaml
+**/values.dev.yaml
+
+# ================================
+# IDE & OS-specific files
+# ================================
+.vscode
+.vs
+.next
+.idea
+.project
+.settings
+.classpath
+.DS_Store
+Thumbs.db
+*.swp
+
+# ================================
+# Version control & CI files
+# ================================
+.git
+.gitignore
+
+# ================================
+# Docker & local orchestration
+# ================================
+Dockerfile
+Dockerfile.*
+.dockerignore
+docker-compose.yml
+docker-compose*.yml
+
+# ================================
+# Miscellaneous
+# ================================
+*.bak
+*.old
+*.tmp
+LICENSE
+README.md
