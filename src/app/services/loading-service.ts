@@ -6,11 +6,11 @@ import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 export class LoadingService {
   private loaders = new Map<string, WritableSignal<boolean>>;
 
-  isLoading(key: string): Signal<boolean> {
+  isLoading(key: string): boolean {
     if (!this.loaders.has(key)) {
       this.loaders.set(key, signal(false));
     }
-    return this.loaders.get(key)!;
+    return this.loaders.get(key)!();
   }
 
   loadingOn(key: string) {

@@ -1,8 +1,4 @@
-<app-movie-screening-list
-  [movieList]="movieList()"
-  [loading]="loading()"
-  [error]="error()" >
-
+<div class="page-container">
   <h2>Movies</h2>
 
   <app-selector
@@ -11,4 +7,9 @@
     (selectionChange)="onDayChange($event)">
   </app-selector>
 
-</app-movie-screening-list>
+  <app-movie-screening-list
+    [movieList]="movieList()"
+    [loading]="isLoading(moviesKey)"
+    [error]="error()" >
+  </app-movie-screening-list>
+</div>

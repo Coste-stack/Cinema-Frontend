@@ -1,13 +1,8 @@
-:host {
-  display: block;
-  margin: 0 2px 0 2px;
-}
-
 .selector {
   position: relative;
   display: flex;
   flex-wrap: nowrap;
-  width: 100%;
+  width: calc(100% - 2px);
   height: 2rem;
   border: 1px solid var(--gray-400);
   border-radius: 0.5rem;

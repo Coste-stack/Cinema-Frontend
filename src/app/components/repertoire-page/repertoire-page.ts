@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../models/movie.model';
 import { MovieScreeningList } from '../movie-screening-list/movie-screening-list';
+import { LoadingService } from '../../services/loading-service';
 
 @Component({
   selector: 'app-repertoire-page',
@@ -14,7 +15,10 @@ import { MovieScreeningList } from '../movie-screening-list/movie-screening-list
 export class RepertoirePage {
   private movieService = inject(MovieService);
 
-  loading = signal(false);
+  private loadingService = inject(LoadingService);
+  isLoading = (key: string) => this.loadingService.isLoading(key);
+  readonly moviesKey: string = "movies";
+
   error = signal<string | null>(null);
 
   movieList = signal<Array<Movie>>([]);
@@ -88,7 +92,7 @@ export class RepertoirePage {
   }
 
   private loadMovies(): void {
-    this.loading.set(true);
+    this.loadingService.loadingOn(this.moviesKey);
     this.error.set(null);
 
     this.movieService.getAll(true)
@@ -98,11 +102,11 @@ export class RepertoirePage {
           //console.log('Observable emitted the next value: ' + JSON.stringify(movies));
           const filteredMovies = this.formatMovieDates(movies);
           this.movieList.set(filteredMovies);
-          this.loading.set(false);
+          this.loadingService.loadingOff(this.moviesKey);
         },
         error: (err) => {
           this.error.set('Failed to load movies');
-          this.loading.set(false);
+          this.loadingService.loadingOff(this.moviesKey);
           console.error('Error loading movies:', err);
         }
       }
