@@ -1,11 +1,3 @@
-@if (loading()) {
-  <p>Logging in...</p>
-}
-
-@if (error()) {
-  <p class="error">{{ error() }}</p>
-}
-
 <div id="user-container">
 
   <h2> Register account </h2>
@@ -34,6 +26,15 @@
         </div>
       }
     </div>
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
+    <app-loading-component
+      [visible]="isLoading(key)"
+      [label]="'Register'">
+    </app-loading-component>
 
     <div class="form-control">
       <div id="turnstile-register" appTurnstileDirective></div>

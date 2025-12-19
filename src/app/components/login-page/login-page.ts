@@ -1,13 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth-service';
 import { RouterLink } from '@angular/router';
 import { AuthFormBase } from '../helpers/auth-form-base';
 import { TurnstileDirective } from '../../directives/turnstile-directive';
+import { LoadingComponent } from '../loading-component/loading-component';
 
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule, RouterLink, TurnstileDirective],
+  imports: [ReactiveFormsModule, RouterLink, TurnstileDirective, LoadingComponent],
   templateUrl: './login-page.html',
   styleUrls: ['../helpers/user-auth-form.scss', '../helpers/auth-form.scss','./login-page.scss'],
 })
