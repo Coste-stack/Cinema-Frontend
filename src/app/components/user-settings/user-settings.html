@@ -1,8 +1,8 @@
-@if (error()) {
-  <p class="error">{{ error() }}</p>
-}
-
 <div id="user-settings">
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
 
   <section id="email-section">
     <app-loading-component
@@ -34,21 +34,31 @@
       @if (passwordFormError()) {
         <p class="error"> {{ passwordFormError() }} </p>
       }
+      @if (!isEmailDefault()) {
       <div class="form-control">
         <div id="turnstile-password" appTurnstileDirective></div>
       </div>
+      }
       <app-loading-component
         [visible]="isLoading(passwordKey)"
         [label]="'User Password'">
       </app-loading-component>
-      <button
-        type="submit"
-        class="form-submit-btn"
-        [disabled]="isLoading(passwordKey)"
-      >
-        Change Password
-      </button>
+      @if (!isEmailDefault()) {
+        <button
+          type="submit"
+          class="form-submit-btn"
+        >
+          Change Password
+        </button>
+      } @else {
+        <button
+          type="submit"
+          class="form-submit-btn disabled"
+        >
+          Change Password
+        </button>
+      }
+
     </form>
   </section>
-
 </div>

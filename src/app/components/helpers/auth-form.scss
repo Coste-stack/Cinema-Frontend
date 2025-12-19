@@ -22,6 +22,14 @@ form {
       background-color: var(--yellow-green);
       transform: translateY(-2px);
     }
+
+    &.disabled {
+      border: 1px solid #f3f4f6;
+      background-color: #f3f4f6;
+      color: hsl(0, 0%, 50%);
+      cursor: not-allowed;
+      transform: translateY(0);
+    }
   }
 }
 

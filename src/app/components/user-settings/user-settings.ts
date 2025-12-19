@@ -25,14 +25,22 @@ export class UserSettings {
 
   error = signal<string | null>(null);
 
-  email = signal<string>("Email");
   passwordForm!: FormGroup;
+
+  readonly defaultEmailVal: string = "Email";
+  email = signal<string>(this.defaultEmailVal);
+  isEmailDefault = () => this.email() === this.defaultEmailVal;
 
   ngOnInit() {
     this.passwordForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordsMatch });
+
+    // disable password inputs
+    if (this.isEmailDefault()) {
+      this.passwordForm.disable();
+    }
 
     this.getEmail();
   }
@@ -45,6 +53,10 @@ export class UserSettings {
     .subscribe({
       next: (response) => {
         this.email.set(response);
+        // enable password inputs
+        if (response !== this.defaultEmailVal) {
+          this.passwordForm.enable();
+        }
         this.loadingService.loadingOff(this.emailKey)
       },
       error: (err) => {
