@@ -11,3 +11,15 @@ main > :not(router-outlet) {
     padding: 1rem 1rem;
   }
 }
+
+.turnstile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  .cf-turnstile {
+    width: fit-content;
+    height: fit-content;
+  }
+}
