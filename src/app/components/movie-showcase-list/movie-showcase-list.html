@@ -1,8 +1,9 @@
 <ng-content></ng-content>
 
-@if (loading) {
-  <p>Loading movies...</p>
-}
+<app-loading-component
+  [visible]="loading"
+  [label]="'Movies'">
+</app-loading-component>
 
 @if (error) {
   <p class="error">{{ error }}</p>

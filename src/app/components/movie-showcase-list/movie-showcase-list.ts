@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Movie } from '../../models/movie.model';
+import { LoadingComponent } from '../loading-component/loading-component';
 
 @Component({
   selector: 'app-movie-showcase-list',
-  imports: [],
+  imports: [LoadingComponent],
   templateUrl: './movie-showcase-list.html',
   styleUrl: './movie-showcase-list.scss',
 })
